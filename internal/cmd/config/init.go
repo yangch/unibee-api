@@ -44,6 +44,7 @@ var (
 	nacosNamespaceArg                string
 	nacosGroupArg                    string
 	nacosDataIdArg                   string
+	nacosEnable                      bool
 	VatNumberUnExemptionCountryCodes string
 	oauthTokenSecret                 string
 	oauthGoogleClientId              string
@@ -53,6 +54,12 @@ var (
 )
 
 func Init() {
+	nacosEnableDefault := true
+	if nacosEnableArg := utility.GetEnvParam("nacos.enable"); len(nacosEnableArg) > 0 {
+		if parsed, err := strconv.ParseBool(nacosEnableArg); err == nil {
+			nacosEnableDefault = parsed
+		}
+	}
 
 	flag.StringVar(&env, "env", utility.GetEnvParam("env"), "local|daily|prod")
 	flag.StringVar(&mode, "mode", utility.GetEnvParam("mode"), "stand-alone|cloud")
@@ -78,6 +85,7 @@ func Init() {
 	flag.StringVar(&nacosNamespaceArg, "nacos-namespace", utility.GetEnvParam("nacos.namespace"), "nacos namespace, default")
 	flag.StringVar(&nacosGroupArg, "nacos-group", utility.GetEnvParam("nacos.group"), "nacos group")
 	flag.StringVar(&nacosDataIdArg, "nacos-data-id", utility.GetEnvParam("nacos.data.id"), "nacos dataid like unibee-settings.yaml")
+	flag.BoolVar(&nacosEnable, "nacos-enable", nacosEnableDefault, "enable loading config from Nacos")
 	flag.StringVar(&VatNumberUnExemptionCountryCodes, "vat-number-un-exemption-country-codes", utility.GetEnvParam("vat.number.un.exemption.country.codes"), "vat config, vat number not exemption countryCodes")
 	flag.StringVar(&oauthTokenSecret, "oauth-token-secret", utility.GetEnvParam("oauth.tokenSecret"), "OAuth token secret")
 	flag.StringVar(&oauthGoogleClientId, "oauth-google-client-id", utility.GetEnvParam("oauth.googleClientId"), "OAuth Google client ID")
@@ -97,7 +105,7 @@ func Init() {
 
 	// Parse Params
 	flag.Parse()
-	if len(nacosIpArg) > 0 {
+	if nacosEnable && len(nacosIpArg) > 0 {
 		_ = deleteFile(DefaultConfigFileName) //delete old config file
 		uPort, err := strconv.ParseUint(nacosPortArg, 10, 64)
 		if err != nil {

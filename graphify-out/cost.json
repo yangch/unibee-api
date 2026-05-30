@@ -1,0 +1,13 @@
+{
+  "runs": [
+    {
+      "date": "2026-05-30T19:51:39.402726+00:00",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "files": 1428,
+      "note": "AST-only; semantic extraction skipped because no LLM API key was set"
+    }
+  ],
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}
