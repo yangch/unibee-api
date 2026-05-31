@@ -1,12 +1,18 @@
-# Graph Report - .  (2026-05-30)
+# Graph Report - unibee-api  (2026-05-30)
 
 ## Corpus Check
-- Large corpus: 1428 files · ~428,146 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder.
+- 1409 files · ~429,218 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 11733 nodes · 20283 edges · 1315 communities (1073 shown, 242 thin omitted)
-- Extraction: 74% EXTRACTED · 26% INFERRED · 0% AMBIGUOUS · INFERRED: 5250 edges (avg confidence: 0.8)
+- 11978 nodes · 20513 edges · 1317 communities (1079 shown, 238 thin omitted)
+- Extraction: 74% EXTRACTED · 26% INFERRED · 0% AMBIGUOUS · INFERRED: 5251 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `3f9bf1a7`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - [[_COMMUNITY_Check Credit Config|Check Credit Config]]
@@ -965,6 +971,8 @@
 - [[_COMMUNITY_Terminal|Terminal]]
 - [[_COMMUNITY_Transaction Status|Transaction Status]]
 - [[_COMMUNITY_Alipay Request Interface|Alipay Request Interface]]
+- [[_COMMUNITY_Community 1315|Community 1315]]
+- [[_COMMUNITY_Community 1316|Community 1316]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Assert()` - 552 edges
@@ -983,70 +991,70 @@
   internal/logic/invoice/handler/invoice_pdf.go → utility/unibee/unibee.go
 - `ConvertTimestampWithTimezone()` --calls--> `Int64()`  [INFERRED]
   internal/logic/batch/tool.go → utility/unibee/unibee.go
+- `StandAloneInit()` --calls--> `IsUint64InArray()`  [INFERRED]
+  internal/logic/dbupgrade/upgrade.go → utility/array.go
 - `ConvertInvoiceToCreditNoteDetail()` --calls--> `GetInvoiceByInvoiceId()`  [INFERRED]
-  api/bean/detail/invoice_detail.go → internal/query/invoice.go
-- `ConvertInvoiceToDetail()` --calls--> `GetInvoiceByInvoiceId()`  [INFERRED]
   api/bean/detail/invoice_detail.go → internal/query/invoice.go
 - `ConvertMerchantMetricEventDetail()` --calls--> `GetInvoiceByInvoiceId()`  [INFERRED]
   api/bean/detail/merchant_metric.go → internal/query/invoice.go
 
-## Communities (1315 total, 242 thin omitted)
+## Communities (1317 total, 238 thin omitted)
 
 ### Community 0 - "Check Credit Config"
-Cohesion: 0.04
-Nodes (117): SimplifyPlan(), CodeApplyPreviewReq, CodeApplyPreviewRes, CheckCreditConfig(), CheckCreditConfigDiscountCodeExclusive(), CheckCreditConfigPayout(), CheckCreditConfigPreviewDefaultUsed(), CheckCreditConfigRecharge() (+109 more)
+Cohesion: 0.03
+Nodes (125): SimplifyPlan(), SimplifySubscription(), CodeApplyPreviewReq, CodeApplyPreviewRes, CheckCreditConfig(), CheckCreditConfigDiscountCodeExclusive(), CheckCreditConfigPayout(), CheckCreditConfigPreviewDefaultUsed() (+117 more)
 
 ### Community 1 - "Controller Invoice"
-Cohesion: 0.03
-Nodes (109): ClearPaymentReq, ClearPaymentRes, CreateProcessInvoiceForNewPayment(), CreateProcessInvoiceForNewPaymentRefund(), InvoicePdfGenerateAndEmailSendBackground(), InvoicePdfGenerateAndEmailSendByTargetTemplateBackground(), MarkInvoiceAsPaidForZeroPayment(), ReconvertCryptoDataForInvoice() (+101 more)
+Cohesion: 0.05
+Nodes (63): CopyGatewayCompanyIssuer(), CreateProcessInvoiceForNewPayment(), CreateProcessInvoiceForNewPaymentRefund(), InvoicePdfGenerateAndEmailSendBackground(), InvoicePdfGenerateAndEmailSendByTargetTemplateBackground(), MarkInvoiceAsPaidForZeroPayment(), ReconvertCryptoDataForInvoice(), SendInvoiceEmailToUser() (+55 more)
 
 ### Community 2 - "Customize Localization Template"
-Cohesion: 0.03
-Nodes (106): ClearOAuthReq, ClearOAuthRes, ConfirmTotpKeyReq, ConfirmTotpKeyRes, CustomizeLocalizationTemplateSyncReq, CustomizeLocalizationTemplateSyncRes, EditSortReq, EditSortRes (+98 more)
+Cohesion: 0.04
+Nodes (101): ClearOAuthReq, ClearOAuthRes, CustomizeLocalizationTemplateSyncReq, CustomizeLocalizationTemplateSyncRes, Context, ControllerCredit, Context, ControllerEmail (+93 more)
 
 ### Community 3 - "Task For Delete"
-Cohesion: 0.03
-Nodes (86): TaskForExpireBatchTasks(), ValidateVatNumberFromCloud(), StartCronJobs(), TaskForExpireDiscounts(), TaskForCompensateEmailHistory(), TestTemplateVariableReplacement(), TestUpdateEmailTemplateVariables(), TestSendgridTemplate() (+78 more)
+Cohesion: 0.05
+Nodes (40): Action, Context, Message, Action, Context, Message, Action, Context (+32 more)
 
 ### Community 4 - "Batch Send Sub"
 Cohesion: 0.05
-Nodes (74): AddNewTrialStartReq, AddNewTrialStartRes, BatchSendSubActivateWebhookEventReq, BatchSendSubActivateWebhookEventRes, BatchSendSubUpdateWebhookEventReq, BatchSendSubUpdateWebhookEventRes, SubscriptionPaymentCallback, SubStatusToEnum() (+66 more)
+Nodes (74): BatchSendSubActivateWebhookEventReq, BatchSendSubActivateWebhookEventRes, BatchSendSubUpdateWebhookEventReq, BatchSendSubUpdateWebhookEventRes, SubscriptionPaymentCallback, SubStatusToEnum(), SubscriptionStatusEnum, SendTemplateEmail() (+66 more)
 
 ### Community 5 - "Controller Metric"
-Cohesion: 0.04
-Nodes (72): DeleteEventReq, DeleteEventRes, EventCurrentValueReq, EventCurrentValueRes, Context, ControllerMetric, Context, ControllerMetric (+64 more)
+Cohesion: 0.07
+Nodes (25): ChangeEmailReq, ChangeEmailRes, DeleteEventReq, DeleteEventRes, EventCurrentValueReq, EventCurrentValueRes, Context, ControllerMetric (+17 more)
 
 ### Community 6 - "Gateway User Payment"
-Cohesion: 0.05
-Nodes (54): Blockonomics, checkAddressBalance(), fetchBlockonomicsPaymentTypes(), getCryptocurrencyPrecision(), getCryptocurrencyPrice(), getUniqueAddress(), parseBlockonomicsPayment(), SendBlockonomicsRequest() (+46 more)
+Cohesion: 0.13
+Nodes (16): Blockonomics, GatewayNewPaymentRefundReq, GatewayPaymentCancelResp, GatewayPaymentCaptureResp, GatewayPaymentListReq, GatewayPaymentRefundResp, GatewayPaymentRo, GatewayUserAttachPaymentMethodResp (+8 more)
 
 ### Community 7 - "Credit Account"
-Cohesion: 0.04
-Nodes (64): InitPromoCreditUserAccount(), QueryOrCreateCreditAccount(), TestContext(), CopyGatewayCompanyIssuer(), Context, Action, Context, Message (+56 more)
+Cohesion: 0.07
+Nodes (40): InitPromoCreditUserAccount(), QueryOrCreateCreditAccount(), TestContext(), Context, InternalWebhookSyncReq, InternalWebhookSyncRes, ControllerSubscription, T (+32 more)
 
 ### Community 8 - "Gateway User Payment"
-Cohesion: 0.05
-Nodes (49): Payssion, fetchPayssionPaymentTypes(), parsePayssionPayment(), SendPayssionPaymentRequest(), TestForGetSubGatewayData(), TestForPayssion(), TestForPayssionGetPaymentDetail(), getTranslateCacheKey() (+41 more)
+Cohesion: 0.09
+Nodes (29): Payssion, fetchPayssionPaymentTypes(), parsePayssionPayment(), SendPayssionPaymentRequest(), Context, GatewayCryptoFromCurrencyAmountDetailReq, GatewayCryptoToCurrencyAmountDetailRes, GatewayInfo (+21 more)
 
 ### Community 9 - "get Action Data()"
 Cohesion: 0.06
 Nodes (56): $(), an(), ar(), At(), ba(), Bn(), bo(), ca() (+48 more)
 
 ### Community 10 - "Send Template Email"
-Cohesion: 0.04
-Nodes (55): ExportGatewaySetupListKeys(), HistorySubscriptionImportReq, HistorySubscriptionImportRes, ArchiveReq, ArchiveRes, Context, ControllerCheckout, Context (+47 more)
+Cohesion: 0.05
+Nodes (50): ActiveSubscriptionImportReq, ActiveSubscriptionImportRes, ExportGatewaySetupListKeys(), HistorySubscriptionImportReq, HistorySubscriptionImportRes, ArchiveReq, ArchiveRes, Context (+42 more)
 
 ### Community 11 - "Page Data()"
 Cohesion: 0.05
-Nodes (40): InvoiceStatusToEnum(), InvoiceSendStatusEnum, InvoiceStatusEnum, GetUTCOffsetFromTimeZone(), JsonArrayTypeConvert(), JsonArrayTypeConvertInt64(), JsonArrayTypeConvertUint64(), ControllerPayment (+32 more)
+Nodes (40): TestForGetCurrencyProviderList(), TestForTimeFormat(), InvoiceStatusToEnum(), InvoiceSendStatusEnum, InvoiceStatusEnum, ExportMultiUserDiscountEntity, ExportUserDiscountEntity, TaskMultiUserDiscountExport (+32 more)
 
 ### Community 12 - "Cancel At Period"
 Cohesion: 0.06
 Nodes (60): CreditAccount, ExternalDiscountParam, Gateway, Invoice, Json, MerchantDiscountCode, Meta, Plan (+52 more)
 
 ### Community 13 - "Gateway User Payment"
-Cohesion: 0.07
-Nodes (38): UnitPay, getUnitPayFormSignature(), parseUnitPayPayment(), SendUnitPayPaymentRequest(), TestForCreateNewUnitPay(), TestForCreateRefundUnitPay(), TestForGetSubscriptionListUnitPay(), TestForGetSubscriptionUnitPay() (+30 more)
+Cohesion: 0.08
+Nodes (29): UnitPay, getUnitPayFormSignature(), parseUnitPayPayment(), Context, GatewayCryptoFromCurrencyAmountDetailReq, GatewayCryptoToCurrencyAmountDetailRes, GatewayInfo, GatewayMerchantBalanceQueryResp (+21 more)
 
 ### Community 14 - "Controller Gateway"
 Cohesion: 0.04
@@ -1057,12 +1065,12 @@ Cohesion: 0.07
 Nodes (31): FireKassa, FireKassaPaymentDetailResponse, FireKassaPaymentResponse, Context, GatewayCryptoFromCurrencyAmountDetailReq, GatewayCryptoToCurrencyAmountDetailRes, GatewayInfo, GatewayMerchantBalanceQueryResp (+23 more)
 
 ### Community 16 - "Controller Subscription"
-Cohesion: 0.06
-Nodes (48): Context, ControllerSession, Context, CreatePreviewReq, CreatePreviewRes, ControllerSubscription, Context, ControllerSubscription (+40 more)
+Cohesion: 0.04
+Nodes (66): ApplySubscriptionNextInvoiceReq, ApplySubscriptionNextInvoiceRes, GetMerchantSubscriptionConfig(), BillingCycleWalkRes, isSubscriptionExpireExcludePending(), PreviewSubscriptionNextInvoice(), SubPipeBillingCycleWalk(), trackForSubscription() (+58 more)
 
 ### Community 17 - "Connection Quick Books"
-Cohesion: 0.04
-Nodes (45): GoAnalyticsPortal(), GetConfigInstance(), ConnectionQuickBooksReq, ConnectionQuickBooksRes, GetPaymentMethodRedirectEntranceUrlCheckout(), GetPaymentRedirectEntranceUrl(), GetPaymentRedirectEntranceUrlCheckout(), GetPaypalPaymentRedirectEntranceUrlCheckout() (+37 more)
+Cohesion: 0.05
+Nodes (39): GoAnalyticsPortal(), GetConfigInstance(), ConnectionQuickBooksReq, ConnectionQuickBooksRes, GetPaymentMethodRedirectEntranceUrlCheckout(), GetPaymentRedirectEntranceUrl(), GetPaymentRedirectEntranceUrlCheckout(), GetPaymentWebhookEntranceUrl() (+31 more)
 
 ### Community 18 - "Gateway User Payment"
 Cohesion: 0.08
@@ -1086,7 +1094,7 @@ Nodes (32): MulenPay, MulenPayPaymentDetailResponse, MulenPayPaymentResponse, Mu
 
 ### Community 23 - "Alipay Request"
 Cohesion: 0.05
-Nodes (38): AlipayAuthQueryTokenRequest, NewAlipayAuthQueryTokenRequest(), AlipayRequest, AlipayRequest, AttachmentType, AlipayRequest, Amount, AlipayRequest (+30 more)
+Nodes (39): AlipayAuthQueryTokenRequest, NewAlipayAuthQueryTokenRequest(), AuthorizationError, AlipayRequest, AlipayRequest, AttachmentType, AlipayRequest, AlipayRequest (+31 more)
 
 ### Community 24 - "Gateway User Payment"
 Cohesion: 0.09
@@ -1097,16 +1105,16 @@ Cohesion: 0.04
 Nodes (51): IntegrationDetails, CaptureOrderMockResponse, CardBillingAddress, Consent, CreateWebhookRequest, CreditCardField, CreditCardsFilter, Customer (+43 more)
 
 ### Community 26 - "Controller Payment"
-Cohesion: 0.05
-Nodes (42): Context, ControllerPayment, MethodDeleteReq, MethodDeleteRes, Context, ControllerPayment, MethodGetReq, MethodGetRes (+34 more)
+Cohesion: 0.06
+Nodes (33): Context, ControllerPayment, MethodDeleteReq, MethodDeleteRes, Context, ControllerPayment, MethodListReq, MethodListRes (+25 more)
 
 ### Community 27 - "Gateway User Payment"
-Cohesion: 0.08
-Nodes (31): fetchAlipayPlusPaymentTypes(), parseAlipayPlusPayment(), AlipayPlus, AlipayPayQueryResponse, Context, GatewayCryptoFromCurrencyAmountDetailReq, GatewayCryptoToCurrencyAmountDetailRes, GatewayInfo (+23 more)
+Cohesion: 0.07
+Nodes (33): fetchAlipayPlusPaymentTypes(), parseAlipayPlusPayment(), AlipayPlus, AlipayPayQueryResponse, Context, GatewayCryptoFromCurrencyAmountDetailReq, GatewayCryptoToCurrencyAmountDetailRes, GatewayInfo (+25 more)
 
 ### Community 28 - "Gateway User Payment"
 Cohesion: 0.08
-Nodes (30): Alipay, parseAlipayPayment(), NewDefaultAlipayClient(), AlipayPayQueryResponse, Context, GatewayCryptoFromCurrencyAmountDetailReq, GatewayCryptoToCurrencyAmountDetailRes, GatewayInfo (+22 more)
+Nodes (29): Alipay, parseAlipayPayment(), NewDefaultAlipayClient(), AlipayPayQueryResponse, Context, GatewayCryptoFromCurrencyAmountDetailReq, GatewayCryptoToCurrencyAmountDetailRes, GatewayInfo (+21 more)
 
 ### Community 29 - "Gateway User Payment"
 Cohesion: 0.08
@@ -1117,8 +1125,8 @@ Cohesion: 0.11
 Nodes (28): printChannelPanic(), GatewayProxy, Context, GatewayCryptoFromCurrencyAmountDetailReq, GatewayCryptoToCurrencyAmountDetailRes, GatewayInfo, GatewayInterface, GatewayMerchantBalanceQueryResp (+20 more)
 
 ### Community 31 - "Apply Subscription Next"
-Cohesion: 0.05
-Nodes (38): ApplySubscriptionNextInvoiceReq, ApplySubscriptionNextInvoiceRes, BatchSendInvoiceWebhookEventReq, BatchSendInvoiceWebhookEventRes, InvoiceRollbackAllDiscountsFromInvoice(), InvoiceRollbackAllDiscountsFromPayment(), Action, Context (+30 more)
+Cohesion: 0.03
+Nodes (80): TaskForExpireBatchTasks(), convertCSVToXlsx(), NewBatchExportTaskV2(), startRunExportTaskBackgroundV2(), failureTask(), RefactorData(), BatchSendInvoiceWebhookEventReq, BatchSendInvoiceWebhookEventRes (+72 more)
 
 ### Community 32 - "Gateway User Payment"
 Cohesion: 0.08
@@ -1157,8 +1165,8 @@ Cohesion: 0.07
 Nodes (42): LoginOtpReq, LoginOtpRes, LoginOtpVerifyReq, LoginOtpVerifyRes, LoginReq, LoginRes, PasswordForgetOtpReq, PasswordForgetOtpRes (+34 more)
 
 ### Community 41 - "Controller Payment"
-Cohesion: 0.06
-Nodes (30): GetGatewayServiceProvider(), GetGatewayWebhookServiceProviderByGatewayName(), CaptureReq, CaptureRes, GatewayDetailReq, GatewayDetailRes, Context, ControllerPayment (+22 more)
+Cohesion: 0.13
+Nodes (14): CaptureReq, CaptureRes, Context, ControllerPayment, Client, Context, GatewayRedirectResp, MerchantGateway (+6 more)
 
 ### Community 42 - "Alipay Request"
 Cohesion: 0.06
@@ -1181,8 +1189,8 @@ Cohesion: 0.08
 Nodes (39): CreditAccount, CreditAccountDetail, CreditConfig, CreditRecharge, CreditTransaction, CreditTransactionDetail, Gateway, Invoice (+31 more)
 
 ### Community 47 - "Webhook Event"
-Cohesion: 0.06
-Nodes (31): printPanic(), Action, Context, Message, Action, Context, Message, Action (+23 more)
+Cohesion: 0.03
+Nodes (78): TestForAlipayGetPaymentDetail(), TestTemplateVariableReplacement(), TestUpdateEmailTemplateVariables(), printPanic(), HandleRefundReq, CreateOrUpdatePaymentTimelineFromRefund(), CreateOrUpdateRefundByDetail(), HandleRefundCancelled() (+70 more)
 
 ### Community 48 - "Mark Refund Invoice"
 Cohesion: 0.08
@@ -1193,28 +1201,28 @@ Cohesion: 0.08
 Nodes (38): MerchantMemberDetail, MerchantMemberDevice, MerchantOperationLogDetail, Meta, ClearOAuthReq, ClearOAuthRes, ClearTotpReq, ClearTotpRes (+30 more)
 
 ### Community 50 - "Edit Promo Config"
-Cohesion: 0.08
-Nodes (33): CreateDiscountCodeInternalReq, ActivateMerchantDiscountCode(), CreateExternalDiscount(), DeactivateMerchantDiscountCode(), DeleteMerchantDiscountCode(), EditMerchantDiscountCode(), HardDeleteMerchantDiscountCode(), NewMerchantDiscountCode() (+25 more)
+Cohesion: 0.09
+Nodes (32): CreateDiscountCodeInternalReq, ActivateMerchantDiscountCode(), CreateExternalDiscount(), DeactivateMerchantDiscountCode(), DeleteMerchantDiscountCode(), EditMerchantDiscountCode(), HardDeleteMerchantDiscountCode(), NewMerchantDiscountCode() (+24 more)
 
 ### Community 51 - "Test Validate Number"
-Cohesion: 0.09
-Nodes (26): B, CountryRates, Github, getEnvelope(), Lookup(), BenchmarkValidateFormat(), ExampleValidateNumber(), TestValidateNumber() (+18 more)
+Cohesion: 0.28
+Nodes (9): CountryRates, RatePeriod, FetchRates(), GetCountryRates(), GetRates(), TestCountryRates_GetRate(), TestCountryRates_GetRateOn(), Time (+1 more)
 
 ### Community 52 - "Controller Auth"
-Cohesion: 0.06
-Nodes (31): CreditNoteListReq, CreditNoteListRes, Context, ControllerAuth, Context, ControllerAuth, Context, ControllerAuth (+23 more)
+Cohesion: 0.09
+Nodes (22): Context, LoginReq, LoginRes, ControllerAuth, Context, ControllerAuth, Context, ControllerAuth (+14 more)
 
 ### Community 53 - "Gateway User Payment"
 Cohesion: 0.10
 Nodes (22): Airwallex, getAirwallexAccessToken(), Context, GatewayInfo, GatewayMerchantBalanceQueryResp, GatewayNewPaymentRefundReq, GatewayNewPaymentReq, GatewayNewPaymentResp (+14 more)
 
 ### Community 54 - "Create Or Update"
-Cohesion: 0.13
-Nodes (34): printChannelPanic(), SaveEvent(), TradeEventTypeEnum, HandlePayReq, UpdateInvoiceFromPayment(), CompensateForPaymentSuccess(), CreateOrUpdatePaymentItemForPaymentInvoice(), CreateOrUpdatePaymentTimelineForPayment() (+26 more)
+Cohesion: 0.14
+Nodes (33): GetPaymentCallbackServiceProvider(), printChannelPanic(), SaveEvent(), TradeEventTypeEnum, HandlePayReq, UpdateInvoiceFromPayment(), CompensateForPaymentSuccess(), CreateOrUpdatePaymentItemForPaymentInvoice() (+25 more)
 
 ### Community 55 - "Create Or Update"
-Cohesion: 0.11
-Nodes (32): GetPaymentCallbackServiceProvider(), HandleRefundReq, CreateOrUpdatePaymentTimelineFromRefund(), CreateOrUpdateRefundByDetail(), HandleRefundCancelled(), HandleRefundFailure(), HandleRefundReversed(), HandleRefundSuccess() (+24 more)
+Cohesion: 0.40
+Nodes (4): Context, ControllerPayment, PaymentCallbackAgainReq, PaymentCallbackAgainRes
 
 ### Community 56 - "Ao()"
 Cohesion: 0.11
@@ -1225,16 +1233,16 @@ Cohesion: 0.08
 Nodes (29): BillingCycle, Frequency, Context, ListParams, Money, Patch, Client, PricingScheme (+21 more)
 
 ### Community 58 - "List Req"
-Cohesion: 0.06
-Nodes (29): GetMerchantId(), Context, ControllerInvoice, NewReq, NewRes, Context, ControllerMember, Context (+21 more)
+Cohesion: 0.40
+Nodes (4): Context, ControllerInvoice, NewReq, NewRes
 
 ### Community 59 - "Gateway New Payment"
 Cohesion: 0.08
 Nodes (34): GatewayBalance, GatewayCreateSubscriptionResp, GatewayCryptoFromCurrencyAmountDetailReq, GatewayCryptoToCurrencyAmountDetailRes, GatewayCurrencyExchange, GatewayMerchantBalanceQueryResp, GatewayNewPaymentRefundReq, GatewayNewPaymentReq (+26 more)
 
 ### Community 60 - "Delivery Info"
-Cohesion: 0.09
-Nodes (26): DeliveryInfo, DiscountLineDetail, CustomField, Date, Decimal, EmailAddress, Line, LinkedTxn (+18 more)
+Cohesion: 0.16
+Nodes (10): DeliveryInfo, CustomField, EmailAddress, LinkedTxn, MemoRef, MetaData, PhysicalAddress, Client (+2 more)
 
 ### Community 61 - "Edit Country Config"
 Cohesion: 0.10
@@ -1242,7 +1250,7 @@ Nodes (34): Gateway, ListReq, ListRes, GatewayBank, GatewayCompanyIssuer, Gatewa
 
 ### Community 62 - "Active Subscription Import"
 Cohesion: 0.08
-Nodes (28): ActiveSubscriptionImportReq, ActiveSubscriptionImportRes, Context, ControllerSubscription, Context, ControllerUser, UpdateReq, UpdateRes (+20 more)
+Nodes (28): ValidateVatNumberFromCloud(), ConvertUserAccountToDetail(), ControllerVat, Context, NumberValidateReq, NumberValidateRes, Context, ControllerUser (+20 more)
 
 ### Community 63 - "Ai()"
 Cohesion: 0.12
@@ -1253,20 +1261,20 @@ Cohesion: 0.15
 Nodes (34): Context, CreditTransaction, Invoice, InvoiceDetail, InvoiceItemSimplify, InvoicePlanSnapshot, Merchant, MerchantDiscountCode (+26 more)
 
 ### Community 65 - "Controller Gateway"
-Cohesion: 0.07
-Nodes (28): ControllerGateway, Context, ListReq, ListRes, Context, ListReq, ListRes, ControllerGateway (+20 more)
+Cohesion: 0.12
+Nodes (20): ControllerGateway, Context, ListReq, ListRes, Context, ListReq, ListRes, ControllerGateway (+12 more)
 
 ### Community 66 - "Subscription Onetime Addon"
-Cohesion: 0.14
-Nodes (20): HandleOnetimeAddonPaymentCancel(), HandleOnetimeAddonPaymentFailure(), HandleOnetimeAddonPaymentSuccess(), SubscriptionOnetimeAddonDetail(), UpdateSubscriptionAddonPurchasePaymentId(), SubscriptionOnetimeAddonDetail, WebhookEvent, Context (+12 more)
+Cohesion: 0.25
+Nodes (8): SubscriptionOnetimeAddonDetail, WebhookEvent, Context, Invoice, Payment, Refund, Onetime, SendMerchantSubscriptionOnetimeAddonWebhookBackground()
 
 ### Community 67 - "user new"
 Cohesion: 0.06
 Nodes (33): ControllerAuth, ControllerGateway, ControllerInvoice, ControllerMerchant, ControllerMetric, ControllerPayment, ControllerPlan, ControllerProduct (+25 more)
 
 ### Community 68 - "Gateway User Attach"
-Cohesion: 0.15
-Nodes (19): Stripe, parseStripeRefund(), Context, GatewayInfo, GatewayMerchantBalanceQueryResp, GatewayPaymentCancelResp, GatewayPaymentCaptureResp, GatewayPaymentListReq (+11 more)
+Cohesion: 0.17
+Nodes (14): Stripe, parseStripeRefund(), GatewayMerchantBalanceQueryResp, GatewayNewPaymentRefundReq, GatewayPaymentRefundResp, GatewayUserAttachPaymentMethodResp, GatewayUserCreateResp, GatewayUserDeAttachPaymentMethodResp (+6 more)
 
 ### Community 69 - "vendor json"
 Cohesion: 0.06
@@ -1285,8 +1293,8 @@ Cohesion: 0.08
 Nodes (26): Context, SimplifyMerchantCheckout(), SimplifyMerchantCheckoutList(), CheckoutSignIn, MerchantCheckout, ControllerCheckout, Context, GetReq (+18 more)
 
 ### Community 73 - "Gateway Detail Invoice"
-Cohesion: 0.11
-Nodes (23): GatewayDetailInvoiceInternalResp, ChangeGatewayReq, ChangeGatewayRes, Context, ControllerUser, Context, GatewayUser, UserAccount (+15 more)
+Cohesion: 0.18
+Nodes (11): GatewayDetailInvoiceInternalResp, Context, GatewayRedirectResp, Invoice, InvoiceItemSimplify, MerchantGateway, Request, InvoiceStatusEnum (+3 more)
 
 ### Community 74 - "Controller Discount"
 Cohesion: 0.08
@@ -1298,47 +1306,47 @@ Nodes (30): Meta, UserAccount, UserAccountDetail, AdminNoteListReq, AdminNoteLis
 
 ### Community 76 - "Get Credit Config"
 Cohesion: 0.12
-Nodes (29): Context, MerchantMember, UserAccount, ConvertCreditAmountToCurrency(), ConvertTransactionCreditAmountToCurrency(), GetCreditConfig(), GetCreditConfigTotalDecrementAmount(), GetCreditConfigTotalIncrementAmount() (+21 more)
+Nodes (31): Context, MerchantMember, UserAccount, ConvertCreditAmountToCurrency(), ConvertTransactionCreditAmountToCurrency(), GetCreditAccountTotalDecrementAmount(), GetCreditAccountTotalIncrementAmount(), GetCreditConfig() (+23 more)
 
 ### Community 77 - "Is Client Identity"
-Cohesion: 0.10
-Nodes (20): EventMetricCharge, SimplifyMerchantMetricEvent(), MerchantMetricEvent, DefaultVatGateway, DeleteDeviceReq, DeleteDeviceRes, GetClientIdentityListCacheKey(), Context (+12 more)
+Cohesion: 0.13
+Nodes (22): MerchantCurrencyConfig, MerchantMultiCurrencyConfig, ExchangeAmountToCurrency(), GetMerchantMultiCurrencyConfig(), PlanMultiCurrency, DeleteDeviceReq, DeleteDeviceRes, GetClientIdentityListCacheKey() (+14 more)
 
 ### Community 78 - "Country List()"
 Cohesion: 0.09
 Nodes (26): GetCloudVatCountryList(), GetCloudVatCountryListByCountryCode(), NumberValidateReq, ControllerVat, Context, CountryListReq, CountryListRes, Context (+18 more)
 
 ### Community 79 - "Convert Invoice To"
-Cohesion: 0.12
-Nodes (29): Context, CreditTransaction, Gateway, Invoice, InvoiceItemSimplify, InvoicePlanSnapshot, Merchant, MerchantDiscountCode (+21 more)
+Cohesion: 0.06
+Nodes (54): Context, CreditTransaction, Gateway, Invoice, InvoiceItemSimplify, InvoicePlanSnapshot, Merchant, MerchantDiscountCode (+46 more)
 
 ### Community 80 - "Health Check()"
-Cohesion: 0.08
-Nodes (22): HealthCheck(), Version(), TestImageEncode(), Request, Context, ControllerProfile, UpdateReq, UpdateRes (+14 more)
+Cohesion: 0.20
+Nodes (9): TestImageEncode(), Context, ControllerProfile, UpdateReq, UpdateRes, T, CheckTimeZone(), GetTimeZoneList() (+1 more)
 
 ### Community 81 - "Controller Auth"
 Cohesion: 0.09
-Nodes (24): GetClientIdentityActivity(), GetClientIdentityActivityCacheKey(), UpdateClientIdentityActivityTime(), UpdateClientIdentityLoginTime(), ClientIdentityActivity, Context, LoginReq, LoginRes (+16 more)
+Nodes (24): GetClientIdentityActivity(), GetClientIdentityActivityCacheKey(), UpdateClientIdentityActivityTime(), UpdateClientIdentityLoginTime(), ClientIdentityActivity, Context, ControllerAuth, Context (+16 more)
 
 ### Community 82 - "Detail Req"
 Cohesion: 0.11
 Nodes (28): Meta, Plan, DetailReq, DetailRes, ListReq, ListRes, PlanDetail, PlanMetricLimitParam (+20 more)
 
 ### Community 83 - "Merchant Discount Code"
-Cohesion: 0.08
-Nodes (19): DiscountBillingTypeToEnum(), DiscountStatusToEnum(), DiscountTypeToEnum(), DiscountBillingTypeEnum, DiscountStatusEnum, DiscountTypeEnum, MerchantDiscountCodeList(), ExportDiscountEntity (+11 more)
+Cohesion: 0.13
+Nodes (11): DiscountBillingTypeToEnum(), DiscountStatusToEnum(), DiscountTypeToEnum(), DiscountBillingTypeEnum, DiscountStatusEnum, DiscountTypeEnum, ExportDiscountEntity, TaskDiscountExport (+3 more)
 
 ### Community 84 - "Controller Email"
-Cohesion: 0.09
-Nodes (22): AddLocalizationVersionReq, AddLocalizationVersionRes, SimplifyEmailDefaultTemplate(), EmailDefaultTemplate, Sender, IsSupportedLanguage(), EditLocalizationVersionReq, EditLocalizationVersionRes (+14 more)
+Cohesion: 0.11
+Nodes (13): AddLocalizationVersionReq, AddLocalizationVersionRes, IsSupportedLanguage(), EditLocalizationVersionReq, EditLocalizationVersionRes, Context, ControllerEmail, Context (+5 more)
 
 ### Community 85 - "Amount Multi Currencies"
 Cohesion: 0.10
 Nodes (24): AmountMultiCurrenciesExchangeReq, AmountMultiCurrenciesExchangeRes, CloudExchangeRateReq, GetExchangeConversionRateFromClusterCloud(), GetExchangeConversionRates(), GetMerchantExchangeCurrencyRate(), GetPaymentExchangeRateReq, GetPaymentExchangeRateRes (+16 more)
 
 ### Community 86 - "Controller Auth"
-Cohesion: 0.07
-Nodes (23): NewUser, SimplifyUserAccount(), UserAccount, Context, ControllerUser, NewReq, NewRes, Context (+15 more)
+Cohesion: 0.09
+Nodes (19): NewUser, SimplifyUserAccount(), UserAccount, Context, ControllerUser, NewReq, NewRes, Context (+11 more)
 
 ### Community 87 - "Merchant Discount Code"
 Cohesion: 0.11
@@ -1349,16 +1357,16 @@ Cohesion: 0.11
 Nodes (28): Money, Name, AggregatedDiscount, AmountSummaryDetail, CustomAmount, Invoice, InvoiceAddressDetails, InvoiceAddressPortable (+20 more)
 
 ### Community 89 - "Get Merchant By"
-Cohesion: 0.12
-Nodes (23): Context, ControllerAuth, Context, ControllerAuth, RegisterReq, RegisterRes, Context, Merchant (+15 more)
+Cohesion: 0.13
+Nodes (23): ClearTotpReq, ClearTotpRes, Context, ControllerAuth, Context, LoginOtpReq, LoginOtpRes, ControllerAuth (+15 more)
 
 ### Community 90 - "Get Bulk Preload"
 Cohesion: 0.14
 Nodes (26): Context(), GetBulkPreloadData(), GetDiscountCodeFromPreloadContext(), GetGatewayFromPreloadContext(), GetInvoiceFromPreloadContext(), GetPaymentFromPreloadContext(), GetPlanFromPreloadContext(), GetProductFromPreloadContext() (+18 more)
 
 ### Community 91 - "Merchant Webhook Endpoint"
-Cohesion: 0.14
-Nodes (22): TestEvent(), WebhookEventInListeningEvents(), WebhookEvent, T, Context, MerchantWebhook, MerchantWebhookEndpoint, MerchantWebhookLog (+14 more)
+Cohesion: 0.06
+Nodes (42): DeleteEndpointReq, DeleteEndpointRes, EndpointListReq, EndpointListRes, EndpointLogListReq, EndpointLogListRes, TestEvent(), WebhookEventInListeningEvents() (+34 more)
 
 ### Community 92 - "Append Item()"
 Cohesion: 0.08
@@ -1366,7 +1374,7 @@ Nodes (6): Contact, Discount, Document, HeaderFooter, Item, Tax
 
 ### Community 93 - "Is Lang Available()"
 Cohesion: 0.16
-Nodes (19): IsLangAvailable(), JsonRes, JsonExit(), JsonRedirect(), JsonRedirectExit(), OpenApiJsonExit(), portalJson(), Request (+11 more)
+Nodes (18): IsLangAvailable(), JsonRes, JsonExit(), JsonRedirect(), JsonRedirectExit(), OpenApiJsonExit(), portalJson(), Request (+10 more)
 
 ### Community 94 - "User Name"
 Cohesion: 0.14
@@ -1381,16 +1389,16 @@ Cohesion: 0.10
 Nodes (22): Context, ControllerPayment, TimeLineListReq, TimeLineListRes, Context, TimeLineListReq, TimeLineListRes, ControllerPayment (+14 more)
 
 ### Community 97 - "Test Clock Walk"
-Cohesion: 0.12
-Nodes (22): BillingCycleWalkRes, GetMerchantSubscriptionConfig(), BillingCycleWalkRes, isSubscriptionExpireExcludePending(), PreviewSubscriptionNextInvoice(), SubPipeBillingCycleWalk(), trackForSubscription(), trackForSubscriptionLatestProcessInvoice() (+14 more)
+Cohesion: 0.22
+Nodes (8): BillingCycleWalkRes, Context, ControllerSubscription, Context, WalkSubscriptionToTestClock(), TestClockWalkRes, TestClockWalkReq, TestClockWalkRes
 
 ### Community 98 - "Convert Cent To"
-Cohesion: 0.10
-Nodes (22): ConvertCreditAmountToCurrency(), ConvertCurrencyAmountToCreditAmount(), TestForGetCurrencyProviderList(), TestForTimeFormat(), createInvoicePdf(), Context, T, Context (+14 more)
+Cohesion: 0.11
+Nodes (17): ConvertCreditAmountToCurrency(), ConvertCurrencyAmountToCreditAmount(), Context, ControllerPayment, Context, currencyNumberCheck(), NewPaymentRefundReq, NewPaymentRefundRes (+9 more)
 
 ### Community 99 - "Test Sber Pay"
-Cohesion: 0.10
-Nodes (21): GatewayVatRate, Context, ControllerSubscription, NewAdminNoteReq, NewAdminNoteRes, Context, ControllerUser, NewAdminNoteReq (+13 more)
+Cohesion: 0.07
+Nodes (33): GatewayVatRate, Context, Context, ControllerSubscription, NewAdminNoteReq, NewAdminNoteRes, Context, ControllerUser (+25 more)
 
 ### Community 100 - "Captured Payments"
 Cohesion: 0.11
@@ -1401,8 +1409,8 @@ Cohesion: 0.08
 Nodes (17): Auth, Auth, Config, Login, MinioConfig, OAuth, RedisConfig, RedisConfigDetail (+9 more)
 
 ### Community 102 - "Quick Books Authorization"
-Cohesion: 0.17
-Nodes (23): QuickBooksAuthorizationEntry(), Request, Context, ControllerInvoice, Account, BearerToken, Client, Context (+15 more)
+Cohesion: 0.24
+Nodes (19): QuickBooksAuthorizationEntry(), Request, Account, BearerToken, Client, Context, Customer, InvoiceDetail (+11 more)
 
 ### Community 103 - "Amount Limit"
 Cohesion: 0.09
@@ -1413,8 +1421,8 @@ Cohesion: 0.08
 Nodes (24): IMerchantAuth, IMerchantCheckout, IMerchantCredit, IMerchantDiscount, IMerchantEmail, IMerchantGateway, IMerchantIntegration, IMerchantInvoice (+16 more)
 
 ### Community 105 - "Controller Product"
-Cohesion: 0.09
-Nodes (20): Context, DetailReq, DetailRes, ControllerProduct, Context, ListReq, ListRes, ControllerProduct (+12 more)
+Cohesion: 0.14
+Nodes (12): Context, ListReq, ListRes, ControllerProduct, Context, ListReq, ListRes, ControllerProduct (+4 more)
 
 ### Community 106 - "New Checkout()"
 Cohesion: 0.08
@@ -1425,28 +1433,28 @@ Cohesion: 0.08
 Nodes (24): ControllerInformation, ControllerInvoice, ControllerPayment, ControllerPlan, ControllerRefund, ControllerSubscription, ControllerUser, ISystemAuth (+16 more)
 
 ### Community 108 - "Metric Plan Charge"
-Cohesion: 0.12
-Nodes (22): MetricPlanChargeGraduatedStep, Plan, UserMetricChargeInvoiceItem, EventMetricCharge, ConvertMetricPlanBindingEntityFromPlan(), ConvertMetricPlanBindingListFromPlan(), MetricPlanBindingEntity, MetricPlanChargeGraduatedStep (+14 more)
+Cohesion: 0.24
+Nodes (13): MetricPlanChargeGraduatedStep, Plan, UserMetricChargeInvoiceItem, EventMetricCharge, ConvertMetricPlanBindingEntityFromPlan(), ConvertMetricPlanBindingListFromPlan(), MetricPlanBindingEntity, MetricPlanChargeGraduatedStep (+5 more)
 
 ### Community 109 - "merchant new"
-Cohesion: 0.08
-Nodes (24): ControllerAuth, ControllerCheckout, ControllerCredit, ControllerDiscount, ControllerEmail, ControllerGateway, ControllerIntegration, ControllerInvoice (+16 more)
+Cohesion: 0.05
+Nodes (42): IMerchantAuth, IMerchantCredit, IMerchantDiscount, IMerchantOss, IMerchantPayment, IMerchantProfile, IMerchantSearch, IMerchantTask (+34 more)
 
 ### Community 110 - "Disconnection Quick Books"
-Cohesion: 0.09
-Nodes (19): ConfigUpdateReq, ConfigUpdateRes, DisconnectionQuickBooksReq, DisconnectionQuickBooksRes, Context, ControllerIntegration, Context, ControllerSubscription (+11 more)
+Cohesion: 0.10
+Nodes (17): ConfigUpdateReq, ConfigUpdateRes, DisconnectionQuickBooksReq, DisconnectionQuickBooksRes, Context, ControllerIntegration, Context, ControllerSubscription (+9 more)
 
 ### Community 111 - "Authorize Order Request"
 Cohesion: 0.15
 Nodes (15): AuthorizeOrderRequest, AuthorizeOrderResponse, CaptureDetailsResponse, CaptureOrderMockResponse, CaptureOrderRequest, CaptureOrderResponse, CreateOrderPayer, ApplicationContext (+7 more)
 
 ### Community 112 - "Plan Multi Currency"
-Cohesion: 0.16
+Cohesion: 0.13
 Nodes (19): Context, MerchantMultiCurrencyConfig, PlanMetricLimitParam, PlanMetricMeteredChargeParam, PlanMultiCurrency, Plan, GetMerchantMultiCurrencyConfig(), GetPlanCurrencyAmount() (+11 more)
 
 ### Community 113 - "Merchant Gateway"
-Cohesion: 0.24
-Nodes (10): Context, GatewayRedirectResp, Json, MerchantGateway, Request, Context, MerchantGateway, AirwallexWebhook (+2 more)
+Cohesion: 0.06
+Nodes (39): Context, GatewayRedirectResp, Json, MerchantGateway, Request, Context, GatewayRedirectResp, Json (+31 more)
 
 ### Community 114 - "Credit Transaction"
 Cohesion: 0.12
@@ -1461,12 +1469,12 @@ Cohesion: 0.14
 Nodes (24): Al(), bl(), Cl(), Dl(), El(), gl(), hl(), Il() (+16 more)
 
 ### Community 117 - "Get Credit Account"
-Cohesion: 0.11
-Nodes (21): Context, CreditAccount, CreditRecharge, CreditTransaction, Gateway, Invoice, Merchant, MerchantMember (+13 more)
+Cohesion: 0.10
+Nodes (24): Context, CreditAccount, CreditRecharge, CreditTransaction, Gateway, Invoice, Merchant, MerchantMember (+16 more)
 
 ### Community 118 - "On Discount Code"
-Cohesion: 0.21
-Nodes (21): Context, Invoice, MerchantDiscountCode, MerchantGateway, Plan, Subscription, UserAccount, OnDiscountCodeCreated() (+13 more)
+Cohesion: 0.13
+Nodes (30): Context, Context, Invoice, Merchant, MerchantDiscountCode, MerchantGateway, Plan, Subscription (+22 more)
 
 ### Community 119 - "react dom"
 Cohesion: 0.09
@@ -1481,8 +1489,8 @@ Cohesion: 0.09
 Nodes (19): ActivateLocalizationVersionReq, ActivateLocalizationVersionRes, DeleteLocalizationVersionReq, DeleteLocalizationVersionRes, getEmailTemplateGroupVariables(), GetMerchantEmailTemplateList(), UpdateMerchantEmailTemplate(), Context (+11 more)
 
 ### Community 122 - "Get Default Merchant"
-Cohesion: 0.16
-Nodes (20): GetDefaultMerchantEmailConfig(), getDefaultMerchantEmailConfigFromClusterCloud(), GetDefaultMerchantEmailConfigWithClusterCloud(), GetMerchantEmailSender(), SaveHistory(), Send(), SendTemplateEmailByOpenApi(), sendTemplateEmailInternal() (+12 more)
+Cohesion: 0.14
+Nodes (25): GetDefaultMerchantEmailConfig(), getDefaultMerchantEmailConfigFromClusterCloud(), GetDefaultMerchantEmailConfigWithClusterCloud(), GetMerchantEmailSender(), SaveHistory(), Send(), SendTemplateEmailByOpenApi(), sendTemplateEmailInternal() (+17 more)
 
 ### Community 123 - "Get License Req"
 Cohesion: 0.13
@@ -1493,24 +1501,24 @@ Cohesion: 0.13
 Nodes (12): Context, Date, EmailAddress, MetaData, Number, PhysicalAddress, Client, ReferenceType (+4 more)
 
 ### Community 125 - "Handle Credit Recharge"
-Cohesion: 0.22
-Nodes (10): CreditRechargeCallback, HandleCreditRechargeFailed(), HandleCreditRechargeSuccess(), Context, Invoice, Payment, Refund, Context (+2 more)
+Cohesion: 0.19
+Nodes (12): CreditRechargeCallback, HandleCreditRechargeFailed(), HandleCreditRechargeSuccess(), Context, Invoice, Payment, Refund, Context (+4 more)
 
 ### Community 126 - "Controller Task"
 Cohesion: 0.10
 Nodes (17): SimplifyMerchantBatchExportTemplate(), MerchantBatchExportTemplate, DeleteTemplateReq, DeleteTemplateRes, EditTemplateReq, EditTemplateRes, ExportTemplateListReq, ExportTemplateListRes (+9 more)
 
 ### Community 127 - "Controller Invoice"
-Cohesion: 0.11
-Nodes (18): Context, Payment, PaymentTimeline, Refund, GatewayCurrencyExchange, Refund, SimplifyRefund(), SimplifyRefundList() (+10 more)
+Cohesion: 0.09
+Nodes (22): Context, Payment, PaymentTimeline, Refund, GatewayCurrencyExchange, Refund, SimplifyRefund(), SimplifyRefundList() (+14 more)
 
 ### Community 128 - "Billing Plan List"
 Cohesion: 0.15
 Nodes (15): BillingAgreement, ExecuteAgreementResponse, BillingPlan, Context, Link, ListParams, MerchantPreferences, PaymentDefinition (+7 more)
 
 ### Community 129 - "Controller Profile"
-Cohesion: 0.18
-Nodes (19): Context, ControllerProfile, Context, Merchant, MerchantMember, T, CreateMerchantInternalReq, CreateMerchant() (+11 more)
+Cohesion: 0.15
+Nodes (21): Context, ControllerProfile, Context, Merchant, MerchantMember, T, GenerateMerchantAPIKey(), GenerateMerchantWebHookSecret() (+13 more)
 
 ### Community 130 - "as()"
 Cohesion: 0.20
@@ -1533,12 +1541,12 @@ Cohesion: 0.14
 Nodes (20): MerchantBatchExportTemplate, MerchantBatchTask, Meta, UploadFile, DeleteTemplateReq, DeleteTemplateRes, EditTemplateReq, EditTemplateRes (+12 more)
 
 ### Community 135 - "Merchant User Discount"
-Cohesion: 0.12
-Nodes (18): Context, GroupPlanSelector, MerchantDiscountCode, MerchantUserDiscountCode, Plan, UserAccount, ConvertMerchantDiscountCodeDetail(), ConvertMerchantUserDiscountCodeDetail() (+10 more)
+Cohesion: 0.10
+Nodes (22): Context, GroupPlanSelector, MerchantDiscountCode, MerchantUserDiscountCode, Plan, UserAccount, ConvertMerchantDiscountCodeDetail(), ConvertMerchantUserDiscountCodeDetail() (+14 more)
 
 ### Community 136 - "Plan Metric Limit"
-Cohesion: 0.22
-Nodes (19): Context, Plan, PlanMetricLimitParam, PlanMetricMeteredChargeParam, PlanMultiCurrency, T, EditInternalReq, CheckPlanMultiCurrencies() (+11 more)
+Cohesion: 0.14
+Nodes (25): AddonsBindingReq, Context, Plan, PlanMetricLimitParam, PlanMetricMeteredChargeParam, PlanMultiCurrency, T, EditInternalReq (+17 more)
 
 ### Community 137 - "External Discount Param"
 Cohesion: 0.14
@@ -1549,8 +1557,8 @@ Cohesion: 0.12
 Nodes (16): InitDefaultGatewayReq, InitDefaultGatewayRes, Context, ControllerVat, Context, ControllerVat, Context, Context (+8 more)
 
 ### Community 139 - "Sent Platform Merchant"
-Cohesion: 0.14
-Nodes (17): Request, ControllerIp, Context, EmailDefaultTemplate, TableUpgrade, FetchColumnAppendListFromPlatformApi(), FetchDefaultEmailTemplateFromPlatformApi(), sendRequestInMainCtxStart() (+9 more)
+Cohesion: 0.13
+Nodes (18): Request, ControllerIp, Context, EmailDefaultTemplate, TableUpgrade, FetchColumnAppendListFromPlatformApi(), FetchDefaultEmailTemplateFromPlatformApi(), sendRequestInMainCtxStart() (+10 more)
 
 ### Community 140 - "Activate Localization Version"
 Cohesion: 0.14
@@ -1565,8 +1573,8 @@ Cohesion: 0.14
 Nodes (11): CustomField, Date, EmailAddress, Line, MemoRef, MetaData, PhysicalAddress, Client (+3 more)
 
 ### Community 143 - "Get Merchant Segment"
-Cohesion: 0.15
-Nodes (16): Context, GetReq, GetRes, ControllerProfile, Context, Context, UserAccount, Context (+8 more)
+Cohesion: 0.09
+Nodes (23): EditSortReq, EditSortRes, Context, ControllerGateway, Context, ControllerGateway, Context, GetReq (+15 more)
 
 ### Community 144 - "Alipay Request"
 Cohesion: 0.13
@@ -1581,8 +1589,8 @@ Cohesion: 0.13
 Nodes (19): ExternalDiscountParam, Gateway, Invoice, Json, Merchant, MerchantDiscountCode, MerchantGateway, Plan (+11 more)
 
 ### Community 147 - "Subscription Pending Update"
-Cohesion: 0.18
-Nodes (19): Context, Gateway, Invoice, MerchantDiscountCode, MerchantMemberDetail, Payment, Plan, PlanAddonDetail (+11 more)
+Cohesion: 0.06
+Nodes (35): 1. API 密钥管理, 1. 关键指标, 1. 常见错误场景, 1. 支付地址生成, 1. 支付记录扩展, 1. 支付通知, 1. 测试环境, 1. 环境变量 (+27 more)
 
 ### Community 148 - "Endpoint Log List"
 Cohesion: 0.14
@@ -1601,8 +1609,8 @@ Cohesion: 0.16
 Nodes (18): LoginOtpReq, LoginOtpRes, LoginOtpVerifyReq, LoginOtpVerifyRes, LoginReq, LoginRes, PasswordForgetOtpReq, PasswordForgetOtpRes (+10 more)
 
 ### Community 152 - "Get Credit Account"
-Cohesion: 0.19
-Nodes (18): Context, CreditAccount, CreditConfig, CreditPayment, CreditRecharge, CreditRefund, CreditTransaction, GetCreditAccountById() (+10 more)
+Cohesion: 0.11
+Nodes (24): Context, DetailReq, DetailRes, ControllerSubscription, Context, ControllerSubscription, Context, CreditAccount (+16 more)
 
 ### Community 153 - "Payment Item"
 Cohesion: 0.12
@@ -1617,12 +1625,12 @@ Cohesion: 0.12
 Nodes (19): Customer, PaymentMethod, PaymentSource, ApplicationContext, AuthorizeOrderRequest, CapturedPurchaseUnitShipping, CaptureOrderRequest, CaptureOrderResponse (+11 more)
 
 ### Community 156 - "Get Callback Impl()"
-Cohesion: 0.38
-Nodes (7): proxy, printChannelPanic(), Context, Invoice, Payment, PaymentBizCallbackInterface, Refund
+Cohesion: 0.12
+Nodes (22): proxy, printChannelPanic(), GetPaymentDetail(), WebhookEvent, WebhookEvent, Context, DetailReq, DetailRes (+14 more)
 
 ### Community 157 - "Merchant Metric Plan"
-Cohesion: 0.18
-Nodes (15): Context, MerchantMetricPlanLimitDetail, Context, MerchantMetricPlanLimitDetail, T, Context, MerchantMetricPlanLimit, MerchantMetricPlanLimitInternalReq (+7 more)
+Cohesion: 0.12
+Nodes (29): SimplifyMerchantMetric(), MerchantMetric, Context, MerchantMetric, Context, MerchantMetricPlanLimitDetail, Plan, PlanMetricLimitParam (+21 more)
 
 ### Community 158 - "Alipay Request"
 Cohesion: 0.14
@@ -1637,12 +1645,12 @@ Cohesion: 0.14
 Nodes (12): CustomField, Date, EmailAddress, Line, MemoRef, MetaData, Number, PhysicalAddress (+4 more)
 
 ### Community 161 - "Get User Metric"
-Cohesion: 0.29
-Nodes (18): Context, Invoice, MerchantMetric, PlanMetricLimitDetail, Subscription, UserAccount, UserMetric, UserMetricChargeInvoiceItemEntity (+10 more)
+Cohesion: 0.35
+Nodes (16): Context, MerchantMetric, PlanMetricLimitDetail, Subscription, UserAccount, UserMetric, UserMetricChargeInvoiceItemEntity, MetricUserUsedValue (+8 more)
 
 ### Community 162 - "Subscription Pending Update"
-Cohesion: 0.13
-Nodes (16): Context, ControllerSubscription, Context, ControllerSubscription, Context, SubscriptionPendingUpdateDetail, PendingUpdateDetailReq, PendingUpdateDetailRes (+8 more)
+Cohesion: 0.23
+Nodes (10): Context, ControllerSubscription, Context, SubscriptionPendingUpdateDetail, PendingUpdateListReq, PendingUpdateListRes, GetSubscriptionPendingUpdateDetailByPendingUpdateId(), SubscriptionPendingUpdateList() (+2 more)
 
 ### Community 163 - "Credit Account Admin"
 Cohesion: 0.12
@@ -1653,12 +1661,12 @@ Cohesion: 0.20
 Nodes (15): SimplifyMerchantMember(), creditTransactionDetail, creditTransactionListInternalReq, creditTransactionListInternalRes, PreloadData, TaskCreditTransactionV2Export, convertToCreditTransactionDetailWithPreload(), creditTransactionList() (+7 more)
 
 ### Community 165 - "Payment Status Enum"
-Cohesion: 0.15
-Nodes (15): Json, PaymentStatusEnum, GatewayCurrencyExchange, GatewayPaymentData, Payment, SimplifyPayment(), SimplifyPaymentList(), Context (+7 more)
+Cohesion: 0.11
+Nodes (18): Json, PaymentStatusEnum, GatewayCurrencyExchange, GatewayPaymentData, Payment, SimplifyPayment(), SimplifyPaymentList(), GetRefundDetail() (+10 more)
 
 ### Community 166 - "User Status To"
-Cohesion: 0.16
-Nodes (11): UserStatusToEnum(), UserTypeToEnum(), UserStatusEnum, UserTypeEnum, Context, MerchantBatchTask, userListInternalReq, userListInternalRes (+3 more)
+Cohesion: 0.10
+Nodes (16): UserStatusToEnum(), UserTypeToEnum(), UserStatusEnum, UserTypeEnum, Context, MerchantBatchTask, Time, Context (+8 more)
 
 ### Community 167 - "Alipay Auth Apply"
 Cohesion: 0.16
@@ -1669,23 +1677,23 @@ Cohesion: 0.18
 Nodes (12): Context, ListParams, Patch, Client, SharedListResponse, SharedResponse, CreateProductResponse, ListProductsResponse (+4 more)
 
 ### Community 169 - "Credit Note List"
-Cohesion: 0.15
-Nodes (16): Context, CreditNoteDetail, Context, Invoice, MerchantDiscountCode, MerchantGateway, Payment, Refund (+8 more)
+Cohesion: 0.06
+Nodes (30): 1. 网关配置, 2. 环境变量, API集成, SberPay 支付网关集成文档, v1.0.0 (2024-01-XX), Webhook事件类型, Webhook处理, Webhook处理流程 (+22 more)
 
 ### Community 170 - "Get Payment By"
-Cohesion: 0.16
-Nodes (16): Context, Payment, Time, Subscription, GetPaymentByPaymentId(), SimplifySubscription(), SimplifySubscriptionOnetimeAddon(), SubscriptionConfig (+8 more)
+Cohesion: 0.27
+Nodes (9): Context, Payment, Time, Subscription, GetPaymentByPaymentId(), SimplifySubscriptionOnetimeAddon(), SubscriptionConfig, SubscriptionNextInvoiceData (+1 more)
 
 ### Community 171 - "Onetime Addon New"
 Cohesion: 0.15
 Nodes (16): Invoice, Item, Json, MerchantDiscountCode, Meta, Plan, OnetimeAddonNewReq, OnetimeAddonNewRes (+8 more)
 
 ### Community 172 - "Controller Plan"
-Cohesion: 0.12
-Nodes (14): Merchant, SimplifyMerchant(), ControllerPlan, Context, DetailReq, DetailRes, Context, DetailReq (+6 more)
+Cohesion: 0.08
+Nodes (22): MerchantCurrencyConfig, Oauth, Merchant, SimplifyMerchant(), MerchantCurrencyConfig, MerchantMember, MerchantMemberDevice, MerchantMultiCurrencyConfig (+14 more)
 
 ### Community 173 - "encode Fit Refund"
-Cohesion: 0.13
+Cohesion: 0.14
 Nodes (10): Accounting, Contact, Discount, Fpdf, Document, HeaderFooter, Item, Options (+2 more)
 
 ### Community 174 - "Attachable Ref"
@@ -1709,12 +1717,12 @@ Cohesion: 0.17
 Nodes (12): SetConfig(), createFile(), deleteFile(), Init(), ReplaceConfigContentUserNacos(), setUpDefaultConfig(), SetupDefaultConfigs(), Nacos (+4 more)
 
 ### Community 179 - "Test For Alipay"
-Cohesion: 0.16
-Nodes (14): TestAutochargeAudit(), TestForAlipay(), TestForAlipayGetPaymentDetail(), TestForAlipayPlus(), TestForPaymentTypes(), AlipayAuthConsultRequest, NewAlipayAuthConsultRequest(), AuthMetaData (+6 more)
+Cohesion: 0.17
+Nodes (13): TestAutochargeAudit(), TestForAlipay(), TestForAlipayPlus(), TestForPaymentTypes(), AlipayAuthConsultRequest, NewAlipayAuthConsultRequest(), AuthMetaData, AlipayRequest (+5 more)
 
 ### Community 180 - "Alipay Pay Cancel"
-Cohesion: 0.21
-Nodes (14): cancel(), consult(), createSession(), doPay(), main(), payQuery(), queryRefund(), refund() (+6 more)
+Cohesion: 0.09
+Nodes (28): AvailablePaymentMethod, cancel(), consult(), createSession(), doPay(), main(), payQuery(), queryRefund() (+20 more)
 
 ### Community 181 - "Config Node"
 Cohesion: 0.12
@@ -1725,8 +1733,8 @@ Cohesion: 0.20
 Nodes (10): Decimal, EmailAddress, MetaData, Client, ReferenceType, SaleReceiptLine, SalesReceipt, SalesReceiptItemLineDetail (+2 more)
 
 ### Community 183 - "User Sub Plan"
-Cohesion: 0.17
-Nodes (14): GetSubscriptionAddonsByAddonJson(), GetSubscriptionOneTimeAddonsOfCurrentPeriod(), GetUnfinishedSubscriptionPendingUpdateDetailByPendingUpdateId(), SubscriptionDetail(), Context, PlanAddonDetail, Subscription, Context (+6 more)
+Cohesion: 0.25
+Nodes (9): GetSubscriptionAddonsByAddonJson(), GetSubscriptionOneTimeAddonsOfCurrentPeriod(), Context, PlanAddonDetail, Subscription, Context, Subscription, UserSubPlanCachedListForMetric() (+1 more)
 
 ### Community 184 - "Time Line List"
 Cohesion: 0.14
@@ -1737,8 +1745,8 @@ Cohesion: 0.14
 Nodes (13): Context, ConvertMerchantEmailHistoryDetail(), MerchantEmailHistoryDetail, MerchantEmailHistoryStatistics, MerchantEmailHistoryList(), EmailHistoryListInternalReq, HistoryListReq, HistoryListRes (+5 more)
 
 ### Community 186 - "Controller Auth"
-Cohesion: 0.12
-Nodes (13): Context, LoginOtpReq, LoginOtpRes, ControllerAuth, Context, LoginOtpReq, LoginOtpRes, ControllerAuth (+5 more)
+Cohesion: 0.07
+Nodes (28): 1. **gjson 方法调用错误**, 2. **结构体字段错误**, 3. **函数返回值处理错误**, 4. **测试用例错误**, Blockonomics 通道 Bug 修复总结, gjson 版本兼容性, 🚀 **下一步建议**, 修复后的代码 (+20 more)
 
 ### Community 187 - "Get Member List"
 Cohesion: 0.23
@@ -1757,8 +1765,8 @@ Cohesion: 0.17
 Nodes (13): EmailLocalizationTemplate, MerchantLocalizationVersion, TemplateVariableGroup, Time, SimplifyMerchantEmailTemplate(), EmailLocalizationTemplate, EmailTemplateVariable, MerchantEmailTemplate (+5 more)
 
 ### Community 191 - "Alipay Payment Session"
-Cohesion: 0.14
-Nodes (14): AvailablePaymentMethod, AgreementInfo, AlipayRequest, Amount, CreditPayPlan, Env, Order, PaymentFactor (+6 more)
+Cohesion: 0.07
+Nodes (26): 1. Basic iframe Setup, 1. Create Payment, 1. Message Origin Verification, 1. Responsive Design, 2. Embed Payment Page, 2. Loading States, 2. Message Content Validation, 2. React Integration Example (+18 more)
 
 ### Community 192 - "Token Response"
 Cohesion: 0.23
@@ -1981,8 +1989,8 @@ Cohesion: 0.18
 Nodes (8): Context, DB, Model, TX, NewProductDao(), ProductColumns, ProductDao, ProductColumns
 
 ### Community 247 - "Edit Totp Config"
-Cohesion: 0.15
-Nodes (12): EditTotpConfigReq, EditTotpConfigRes, GetTotpKeyReq, GetTotpKeyRes, Context, ControllerMember, Context, ControllerProfile (+4 more)
+Cohesion: 0.07
+Nodes (25): ConfirmTotpKeyReq, ConfirmTotpKeyRes, EditTotpConfigReq, EditTotpConfigRes, GetTotpKeyReq, GetTotpKeyRes, ClearTotpReq, ClearTotpRes (+17 more)
 
 ### Community 248 - "Refund Columns"
 Cohesion: 0.18
@@ -2029,8 +2037,8 @@ Cohesion: 0.30
 Nodes (15): ds(), Ea(), fs(), Go(), gt(), ho(), ie(), La() (+7 more)
 
 ### Community 259 - "Merchant Metric Event"
-Cohesion: 0.16
-Nodes (13): Context, EventMetricCharge, Invoice, MerchantMetric, MerchantMetricEvent, UserAccount, ConvertMerchantMetricEventDetail(), MerchantMetricEventDetail (+5 more)
+Cohesion: 0.25
+Nodes (8): Context, EventMetricCharge, Invoice, MerchantMetric, MerchantMetricEvent, UserAccount, ConvertMerchantMetricEventDetail(), MerchantMetricEventDetail
 
 ### Community 260 - "Alipay Pay Request"
 Cohesion: 0.15
@@ -2045,8 +2053,8 @@ Cohesion: 0.15
 Nodes (14): CreditAccount, CreditPayout, CreditTransaction, InvoiceItemSimplify, InvoicePlanSnapshot, MerchantDiscountCode, Plan, PlanAddonDetail (+6 more)
 
 ### Community 263 - "merchant member detail"
-Cohesion: 0.28
-Nodes (13): Context, MerchantMember, MerchantMemberDevice, MerchantRole, MerchantRolePermission, Oauth, ConvertMemberGroupPermissions(), ConvertMemberPermissions() (+5 more)
+Cohesion: 0.12
+Nodes (24): Context, MerchantMember, MerchantMemberDevice, MerchantRole, MerchantRolePermission, Oauth, ConvertMemberGroupPermissions(), ConvertMemberPermissions() (+16 more)
 
 ### Community 264 - "Number Validate History"
 Cohesion: 0.15
@@ -2065,8 +2073,8 @@ Cohesion: 0.24
 Nodes (12): MerchantBatchImportTaskInternalRequest, GetImportTaskImpl(), NewBatchImportTask(), ProxyImportRow(), startRunImportTaskBackground(), BatchImportTask, Context, ControllerTask (+4 more)
 
 ### Community 268 - "Detail Req"
-Cohesion: 0.14
-Nodes (11): GetPaymentDetail(), Context, DetailReq, DetailRes, ControllerPayment, Context, DetailReq, DetailRes (+3 more)
+Cohesion: 0.09
+Nodes (20): GetGatewayServiceProvider(), GetGatewayWebhookServiceProviderByGatewayName(), GatewayDetailReq, GatewayDetailRes, Context, ControllerGateway, Context, ControllerPayment (+12 more)
 
 ### Community 269 - "Metric Plan Charge"
 Cohesion: 0.16
@@ -2081,32 +2089,32 @@ Cohesion: 0.23
 Nodes (5): Decimal, Line, Client, ReferenceType, RefundReceipt
 
 ### Community 272 - "Credit Transaction To"
-Cohesion: 0.15
-Nodes (7): CreditTransactionTypeToEnum(), TransactionTypeEnum, ExportCreditTransactionEntity, TaskCreditTransactionExport, Context, MerchantBatchTask, Time
+Cohesion: 0.13
+Nodes (8): CreditTransactionTypeToEnum(), TransactionTypeEnum, ExportCreditTransactionEntity, TaskCreditTransactionExport, Context, MerchantBatchTask, Time, MerchantBatchTask
 
 ### Community 273 - "alipay plus"
-Cohesion: 0.22
-Nodes (8): Context, Payment, Context, GatewayRedirectResp, MerchantGateway, Request, GetPaymentRedirectUrl(), AlipayPlusWebhook
+Cohesion: 0.36
+Nodes (5): Context, GatewayRedirectResp, MerchantGateway, Request, AlipayPlusWebhook
 
 ### Community 274 - "Gateway Redirect Resp"
-Cohesion: 0.33
-Nodes (6): Context, GatewayRedirectResp, Json, MerchantGateway, Request, Bank131Webhook
+Cohesion: 0.08
+Nodes (24): Develop Tools, Email, Env `Local`, Env `Stage`, ex:, Gateway, Generate API Controller Shell：, Generate Dao Code Shell： (+16 more)
 
 ### Community 275 - "Gateway Redirect Resp"
 Cohesion: 0.34
 Nodes (6): Context, GatewayRedirectResp, Json, MerchantGateway, Request, FireKassaWebhook
 
 ### Community 276 - "Gateway Redirect Resp"
-Cohesion: 0.33
-Nodes (6): Context, GatewayRedirectResp, Json, MerchantGateway, Request, MulenPayWebhook
+Cohesion: 0.15
+Nodes (17): checkAddressBalance(), fetchBlockonomicsPaymentTypes(), getCryptocurrencyPrecision(), getCryptocurrencyPrice(), getUniqueAddress(), parseBlockonomicsPayment(), SendBlockonomicsRequest(), Context (+9 more)
 
 ### Community 277 - "Gateway Redirect Resp"
-Cohesion: 0.33
-Nodes (6): Context, GatewayRedirectResp, Json, MerchantGateway, Request, AliKassaWebhook
+Cohesion: 0.10
+Nodes (20): 1. Basic Message Listening, 1. Message Origin Verification, 2. Handler Function Examples, 2. Message Content Validation, 3. Complete iframe Integration Example, FAQ, Message Communication Protocol, Message Format (+12 more)
 
 ### Community 278 - "Gateway Redirect Resp"
-Cohesion: 0.33
-Nodes (6): Context, GatewayRedirectResp, Json, MerchantGateway, Request, SberPayWebhook
+Cohesion: 0.10
+Nodes (19): Action Data Structure, API Integration, Blockonomics Configuration, Blockonomics Integration, Build, Build Process, Development, Development (+11 more)
 
 ### Community 279 - "invoice preload"
 Cohesion: 0.19
@@ -2133,8 +2141,8 @@ Cohesion: 0.22
 Nodes (12): Meta, GetReq, GetRes, UpdateReq, UpdateRes, UserAccountDetail, ChangeGatewayReq, ChangeGatewayRes (+4 more)
 
 ### Community 285 - "Add Space Before"
-Cohesion: 0.19
-Nodes (11): AddSpaceBeforeUpperCaseExceptFirst(), ConvertTimestampWithTimezone(), RefactorData(), RefactorHeaderComments(), RefactorHeaders(), LinkImportTemplateEntry(), refactorHeaderComments(), Comment (+3 more)
+Cohesion: 0.40
+Nodes (5): LinkImportTemplateEntry(), refactorHeaderComments(), Comment, Request, IsIntInArray()
 
 ### Community 286 - "Copy From Ctx()"
 Cohesion: 0.24
@@ -2153,8 +2161,8 @@ Cohesion: 0.21
 Nodes (9): Context, MerchantBatchTask, Payment, PaymentTimeline, Refund, PaymentTimelineListInternalReq, TaskTransactionV2Export, getExternalTransactionId() (+1 more)
 
 ### Community 290 - "Addons Binding Req"
-Cohesion: 0.18
-Nodes (10): AddonsBindingRes, AddonsBindingReq, Context, ControllerPlan, AddonsBindingReq, PlanAddonsBinding(), IntListToString(), MergeInt64Arrays() (+2 more)
+Cohesion: 0.40
+Nodes (4): AddonsBindingRes, AddonsBindingReq, Context, ControllerPlan
 
 ### Community 291 - "gateway webhook proxy"
 Cohesion: 0.37
@@ -2177,8 +2185,8 @@ Cohesion: 0.18
 Nodes (8): Action, Context, Message, Context, init(), NewUserAccountCreateListener(), MerchantCreateListener, SetupForCloudMode()
 
 ### Community 296 - "Merchant Metric"
-Cohesion: 0.32
-Nodes (11): SimplifyMerchantMetric(), MerchantMetric, Context, MerchantMetric, DeleteMerchantMetric(), EditMerchantMetric(), GetMerchantMetricSimplify(), HardDeleteMerchantMetric() (+3 more)
+Cohesion: 0.12
+Nodes (13): CreditNoteListReq, CreditNoteListRes, Context, ControllerAuth, Context, ControllerAuth, RegisterReq, RegisterRes (+5 more)
 
 ### Community 297 - "Meta Data"
 Cohesion: 0.23
@@ -2205,8 +2213,8 @@ Cohesion: 0.23
 Nodes (11): Meta, BatchSendInvoiceWebhookEventReq, BatchSendInvoiceWebhookEventRes, BulkChannelSyncReq, BulkChannelSyncRes, ChannelSyncReq, ChannelSyncRes, InternalWebhookSyncReq (+3 more)
 
 ### Community 303 - "File Upload Req"
-Cohesion: 0.24
-Nodes (10): FileUploadReq, FileUploadRes, Context, ControllerOss, Context, UploadFile, Upload(), UploadLocalFile() (+2 more)
+Cohesion: 0.52
+Nodes (6): Context, UploadFile, Upload(), UploadLocalFile(), FileUploadInput, FileUploadOutput
 
 ### Community 304 - "Create Billing Agreement"
 Cohesion: 0.33
@@ -2217,16 +2225,16 @@ Cohesion: 0.17
 Nodes (11): AmountNotMatch, ClickTooFast, CountryCodeVatNumberNotMatch, DiscountCodeInvalid, DiscountCodeNotStart, DiscountCodePlanError, DiscountCodeReachLimitation, PlanTrialGatewayError (+3 more)
 
 ### Community 306 - "Controller Payment"
-Cohesion: 0.17
-Nodes (9): Context, ControllerPayment, NewReq, NewRes, Context, ControllerPayment, currencyNumberCheck(), NewPaymentRefundReq (+1 more)
+Cohesion: 0.18
+Nodes (16): DiscountLineDetail, Date, Decimal, Line, Number, ReferenceType, AccountBasedExpenseLineDetail, DeliveryInfo (+8 more)
 
 ### Community 307 - "OAuth Config"
 Cohesion: 0.18
 Nodes (11): Currency, Gateway, Language, Meta, GetReq, GetRes, Language, OAuthConfig (+3 more)
 
 ### Community 308 - "Merchant Batch Task"
-Cohesion: 0.17
-Nodes (5): Context, MerchantBatchTask, ImportPlanEntity, TaskPlanImport, StringContainsElement()
+Cohesion: 0.22
+Nodes (4): Context, MerchantBatchTask, ImportPlanEntity, TaskPlanImport
 
 ### Community 309 - "Gateway Redirect Resp"
 Cohesion: 0.30
@@ -2309,8 +2317,8 @@ Cohesion: 0.17
 Nodes (11): AmountNotMatch, ClickTooFast, CountryCodeVatNumberNotMatch, DiscountCodeInvalid, DiscountCodeNotStart, DiscountCodePlanError, DiscountCodeReachLimitation, PlanTrialGatewayError (+3 more)
 
 ### Community 329 - "Merchant Role Permission"
-Cohesion: 0.23
-Nodes (10): Context, MerchantRolePermission, Time, Context, MerchantRole, MerchantMember, MerchantRolePermission, ConvertMemberPermissions() (+2 more)
+Cohesion: 0.13
+Nodes (14): Airwallex 网关集成, API 端点, 不支持的操作, 功能特性, 可选参数, 必需参数, 支付流程, 支持的操作 (+6 more)
 
 ### Community 330 - "Merchant Operation Log"
 Cohesion: 0.23
@@ -2333,7 +2341,7 @@ Cohesion: 0.23
 Nodes (9): QueryAndCreateGatewayUser(), QueryAndCreateGatewayUserWithOutPaymentMethod(), Context, GatewayUser, MerchantGateway, GatewayNewPaymentReq, GatewayNewPaymentResp, GatewayUserPaymentMethodListResp (+1 more)
 
 ### Community 335 - "set Uni Bee"
-Cohesion: 0.32
+Cohesion: 0.36
 Nodes (9): setUniBeeAppInfo(), TestCheckout(), TestGetRefundDetail(), TestStripe(), TestStripeCheckout(), TestStripeDisuteGet(), TestStripeQueryAllRefunds(), T (+1 more)
 
 ### Community 336 - "Country Rate"
@@ -2357,8 +2365,8 @@ Cohesion: 0.33
 Nodes (10): MerchantBatchExportTaskInternalRequest, convertXlsxFileToCSV(), ExportColumnList(), GetExportTaskImpl(), NewBatchExportTask(), refactorHeaderCommentMap(), startRunExportTaskBackground(), BatchExportTask (+2 more)
 
 ### Community 341 - "convert CSVTo Xlsx()"
-Cohesion: 0.22
-Nodes (10): convertCSVToXlsx(), NewBatchExportTaskV2(), startRunExportTaskBackgroundV2(), failureTask(), BatchExportTask, Comment, Context, MerchantBatchTask (+2 more)
+Cohesion: 0.13
+Nodes (12): GenerateInvoicePdf(), MustParseCurrencySymbolValue(), Context, ControllerEmail, Context, ControllerEmail, Context, Invoice (+4 more)
 
 ### Community 342 - "List Req"
 Cohesion: 0.22
@@ -2385,8 +2393,8 @@ Cohesion: 0.25
 Nodes (10): Context, Invoice, MerchantGateway, Plan, Product, Subscription, UserAccount, SubscriptionListPreload() (+2 more)
 
 ### Community 349 - "User Admin Note"
-Cohesion: 0.25
-Nodes (10): Context, CreditAccount, Gateway, MerchantMemberDetail, UserAccount, ConvertUserAccountToDetail(), ConvertUserAdminNoteDetail(), UserAccountDetail (+2 more)
+Cohesion: 0.14
+Nodes (13): Context, CreditAccount, Gateway, MerchantMemberDetail, UserAccount, ConvertUserAdminNoteDetail(), UserAccountDetail, UserAdminNoteDetail (+5 more)
 
 ### Community 350 - "Payment Capture Request"
 Cohesion: 0.35
@@ -2413,20 +2421,20 @@ Cohesion: 0.27
 Nodes (9): MerchantMetricEventDetail, Meta, EventListReq, EventListRes, UserMetricReq, UserMetricRes, UserSubscriptionMetricReq, UserSubscriptionMetricRes (+1 more)
 
 ### Community 356 - "Edit Credit Account"
-Cohesion: 0.18
-Nodes (8): EditCreditAccountReq, EditCreditAccountRes, Context, ControllerCredit, Context, DetailReq, DetailRes, ControllerSubscription
+Cohesion: 0.40
+Nodes (4): EditCreditAccountReq, EditCreditAccountRes, Context, ControllerCredit
 
 ### Community 357 - "Controller Credit"
-Cohesion: 0.18
-Nodes (8): ConfigListReq, ConfigListRes, Context, ControllerCredit, Context, ControllerCredit, PromoConfigReq, PromoConfigRes
+Cohesion: 0.40
+Nodes (4): ConfigListReq, ConfigListRes, Context, ControllerCredit
 
 ### Community 358 - "Merchant Real Time"
-Cohesion: 0.40
-Nodes (6): Merchant, MerchantRealTimeCount, MerchantRealtimeStats, calculateMerchantStatsFromDB(), GetMerchantRealtimeStats(), StatsCacheService
+Cohesion: 0.23
+Nodes (13): PrivateKey, PublicKey, Decode(), Encode(), GenSign(), genSignContent(), getPkcsKey(), getPublicKeyFromBase64String() (+5 more)
 
 ### Community 359 - "Gateway Plan Status"
-Cohesion: 0.27
-Nodes (6): GatewayPlanStatusEnum, PLanStatusToEnum(), PlanTypeDescriptionToEnum(), PlanTypeToEnum(), PlanStatusEnum, PlanType
+Cohesion: 0.13
+Nodes (11): GatewayPlanStatusEnum, PLanStatusToEnum(), PlanTypeDescriptionToEnum(), PlanTypeToEnum(), PlanStatusEnum, PlanType, Context, MerchantBatchTask (+3 more)
 
 ### Community 360 - "Test Airwallex Gateway"
 Cohesion: 0.36
@@ -2449,8 +2457,8 @@ Cohesion: 0.31
 Nodes (5): Context, GatewayRedirectResp, MerchantGateway, Request, InvalidWebhook
 
 ### Community 365 - "Gateway Redirect Resp"
-Cohesion: 0.36
-Nodes (5): Context, GatewayRedirectResp, MerchantGateway, Request, ChangellyWebhook
+Cohesion: 0.22
+Nodes (8): Context, Payment, Context, GatewayRedirectResp, MerchantGateway, Request, GetPaymentRedirectUrl(), ChangellyWebhook
 
 ### Community 366 - "Get Payment By"
 Cohesion: 0.40
@@ -2525,24 +2533,24 @@ Cohesion: 0.22
 Nodes (8): ISystemAuth, ISystemInformation, ISystemInvoice, ISystemPayment, ISystemPlan, ISystemRefund, ISystemSubscription, ISystemUser
 
 ### Community 384 - "Merchant Currency Config"
-Cohesion: 0.25
-Nodes (8): MerchantCurrencyConfig, Oauth, MerchantCurrencyConfig, MerchantMember, MerchantMemberDevice, MerchantMultiCurrencyConfig, Oauth, OauthIdentity
+Cohesion: 0.22
+Nodes (8): Context, GatewayInfo, GatewayPaymentCancelResp, GatewayPaymentCaptureResp, GatewayPaymentListReq, GatewayPaymentRo, Payment, PaymentIntent
 
 ### Community 385 - "Get Merchant Currencies()"
 Cohesion: 0.42
 Nodes (7): GetMerchantCurrencies(), GetMerchantCurrencyMap(), IsFiatCurrencySupport(), TestCurrencySymbol(), TestGetMerchantCurrencyMap(), Currency, T
 
 ### Community 386 - "Get Plan By"
-Cohesion: 0.50
-Nodes (8): Context, Plan, GetAddonsByIds(), GetOneLatestMainPlanByMerchantId(), GetPlanByExternalPlanId(), GetPlanById(), GetPlansByIds(), GetPlansByProductId()
+Cohesion: 0.16
+Nodes (16): ArchiveReq, ArchiveRes, Context, ControllerPlan, Context, DetailReq, DetailRes, ControllerPlan (+8 more)
 
 ### Community 387 - "Activate Req"
-Cohesion: 0.31
-Nodes (7): ActivateReq, ActivateRes, Context, ControllerPlan, Context, PlanActivate(), PlanOrAddonIntervalVerify()
+Cohesion: 0.16
+Nodes (12): ActivateReq, ActivateRes, Context, ControllerPlan, Context, ControllerPlan, Context, PlanPublish() (+4 more)
 
 ### Community 388 - "Get Refund Detail()"
-Cohesion: 0.22
-Nodes (7): GetRefundDetail(), Context, ControllerPayment, Context, RefundDetail, RefundDetailReq, RefundDetailRes
+Cohesion: 0.40
+Nodes (4): Context, ControllerPayment, RefundDetailReq, RefundDetailRes
 
 ### Community 389 - "Account Holder"
 Cohesion: 0.22
@@ -2561,8 +2569,8 @@ Cohesion: 0.31
 Nodes (8): Meta, RefundDetail, NewPaymentRefundReq, NewPaymentRefundRes, RefundDetailReq, RefundDetailRes, RefundListReq, RefundListRes
 
 ### Community 393 - "List Req"
-Cohesion: 0.22
-Nodes (7): Context, ListReq, ListRes, ControllerRole, Context, MerchantRole, MerchantRoleList()
+Cohesion: 0.11
+Nodes (18): MerchantRolePermission, removeByValue(), SimplifyMerchantRole(), MerchantRole, MerchantRolePermission, Context, ListReq, ListRes (+10 more)
 
 ### Community 394 - "Valid Result"
 Cohesion: 0.29
@@ -2590,7 +2598,7 @@ Nodes (3): Context, Client, WebProfile
 
 ### Community 400 - "Webhook Event"
 Cohesion: 0.25
-Nodes (6): WebhookEvent, WebhookEvent, SendPaymentWebhookBackground(), SendRefundWebhookBackground(), FormatToGJson(), Json
+Nodes (12): HandleOnetimeAddonPaymentCancel(), HandleOnetimeAddonPaymentFailure(), HandleOnetimeAddonPaymentSuccess(), SubscriptionOnetimeAddonDetail(), UpdateSubscriptionAddonPurchasePaymentId(), Context, SubscriptionOnetimeAddonDetail, Context (+4 more)
 
 ### Community 401 - "user list"
 Cohesion: 0.46
@@ -2613,8 +2621,8 @@ Cohesion: 0.32
 Nodes (7): Meta, SubscriptionConfig, MerchantVatRule, ConfigReq, ConfigRes, ConfigUpdateReq, ConfigUpdateRes
 
 ### Community 406 - "Get Upgrade List()"
-Cohesion: 0.39
-Nodes (7): GetUpgradeList(), SaveUpgradeHistory(), StandAloneInit(), Context, TableUpgrade, TableUpgradeHistory, IsUint64InArray()
+Cohesion: 0.48
+Nodes (6): GetUpgradeList(), SaveUpgradeHistory(), StandAloneInit(), Context, TableUpgrade, TableUpgradeHistory
 
 ### Community 407 - "User Subscription Metric"
 Cohesion: 0.38
@@ -2641,8 +2649,8 @@ Cohesion: 0.29
 Nodes (5): FileUpload, Request, Context, FileEntry(), GetOssFileByFileName()
 
 ### Community 413 - "example Function()"
-Cohesion: 0.48
-Nodes (6): exampleFunction(), TestGenerate(), TestGenerateInvoicePdf(), TestInvoicePdfGenerateAndEmailSendBackground(), TestMustParseCurrencySymbolValue(), T
+Cohesion: 0.22
+Nodes (12): createInvoicePdf(), exampleFunction(), TestGenerate(), TestGenerateInvoicePdf(), TestInvoicePdfGenerateAndEmailSendBackground(), TestMustParseCurrencySymbolValue(), TestTimeFormat(), InvoiceDetail (+4 more)
 
 ### Community 414 - "append Contact TODoc()"
 Cohesion: 0.48
@@ -2653,16 +2661,16 @@ Cohesion: 0.29
 Nodes (4): Date, Response, parseFailure(), Failure
 
 ### Community 416 - "system invoice webhook"
-Cohesion: 0.38
-Nodes (5): Context, InternalWebhookSyncReq, InternalWebhookSyncRes, ControllerInvoice, syncInvoice()
+Cohesion: 0.25
+Nodes (12): ChangeGatewayReq, ChangeGatewayRes, Context, ControllerUser, Context, GatewayUser, UserAccount, CreateGatewayUser() (+4 more)
 
 ### Community 417 - "user preload"
 Cohesion: 0.48
 Nodes (6): Context, MerchantGateway, UserAccount, UserListPreload(), UserListPreloadForContext(), UserPreloadData
 
 ### Community 418 - "system user webhook"
-Cohesion: 0.38
-Nodes (5): Context, InternalWebhookSyncReq, InternalWebhookSyncRes, ControllerUser, syncUser()
+Cohesion: 0.24
+Nodes (10): getTranslateCacheKey(), mapToDeepLLang(), translateWithDeepL(), translateWithGoogle(), urlEncode(), ControllerTranslater, Context, TranslateReq (+2 more)
 
 ### Community 419 - "Get Payment By"
 Cohesion: 0.38
@@ -2713,8 +2721,8 @@ Cohesion: 0.40
 Nodes (5): refactorHeaderGroupMap(), getFileExtensionFromURL(), TestExcelStreamWrite(), T, Case2Camel()
 
 ### Community 431 - "Credit Account List"
-Cohesion: 0.47
-Nodes (5): CreditAccountList(), CreditAccountListInternalReq, CreditAccountListInternalRes, Context, CreditAccountDetail
+Cohesion: 0.22
+Nodes (4): Github, CountryRate, ValidResult, FormatToJsonString()
 
 ### Community 432 - "Credit Transaction List"
 Cohesion: 0.47
@@ -2765,20 +2773,20 @@ Cohesion: 0.40
 Nodes (3): MetaData, Client, CustomerType
 
 ### Community 445 - "Export Multi User"
-Cohesion: 0.33
-Nodes (3): ExportMultiUserDiscountEntity, TaskMultiUserDiscountExport, Time
+Cohesion: 0.31
+Nodes (9): Context, DetailReq, DetailRes, ControllerProduct, Context, Product, GetDefaultProduct(), GetProductById() (+1 more)
 
 ### Community 446 - "Export User Discount"
-Cohesion: 0.33
-Nodes (3): ExportUserDiscountEntity, TaskUserDiscountExport, Time
+Cohesion: 0.18
+Nodes (8): Context, GetReq, GetRes, Language, ControllerInformation, GetSupportedLanguagesList(), GetCountryCodeList(), isValidISO3166CountryCode()
 
 ### Community 447 - "credit note"
 Cohesion: 0.33
 Nodes (3): Time, ExportCreditNoteEntity, TaskCreditNoteExport
 
 ### Community 448 - "Export Plan Entity"
-Cohesion: 0.33
-Nodes (3): Time, ExportPlanEntity, TaskPlanExport
+Cohesion: 0.44
+Nodes (9): SendUnitPayPaymentRequest(), TestForCreateNewUnitPay(), TestForCreateRefundUnitPay(), TestForGetSubscriptionListUnitPay(), TestForGetSubscriptionUnitPay(), TestForGetUnitPay(), TestForGetUnitPayForProd(), TestForRefundDetailUnitPay() (+1 more)
 
 ### Community 449 - "Export Invoice Entity"
 Cohesion: 0.33
@@ -2793,12 +2801,12 @@ Cohesion: 0.33
 Nodes (3): Time, ExportTransactionEntity, TaskTransactionExport
 
 ### Community 452 - "Export User Entity"
-Cohesion: 0.33
-Nodes (3): Time, ExportUserEntity, TaskUserExport
+Cohesion: 0.27
+Nodes (3): DefaultVatGateway, CountryRate, ValidResult
 
 ### Community 454 - "Controller Plan"
-Cohesion: 0.33
-Nodes (5): Context, ControllerPlan, PlanPublish(), PublishReq, PublishRes
+Cohesion: 0.20
+Nodes (9): API Contract And Data Flow, Architecture, Components And Migration Order, Decisions, Error Handling And Compatibility, Non-Goals For Milestone 1, Purpose, Python API Rewrite Design (+1 more)
 
 ### Community 455 - "Get Invoice By"
 Cohesion: 0.60
@@ -2841,8 +2849,8 @@ Cohesion: 0.40
 Nodes (4): T, SignHMACWebhook(), TestSignature(), VerifyHMACSignature()
 
 ### Community 467 - "webhook listener"
-Cohesion: 0.47
-Nodes (3): MerchantWebhookListener, init(), NewMerchantWebhookListener()
+Cohesion: 0.24
+Nodes (6): Action, Context, Message, MerchantWebhookListener, init(), NewMerchantWebhookListener()
 
 ### Community 468 - "Challenge Trigger Source"
 Cohesion: 0.33
@@ -2857,8 +2865,8 @@ Cohesion: 0.33
 Nodes (5): AlipayNotify, PeriodRule, SubscriptionStatus, AlipaySubscriptionNotify, SubscriptionNotificationType
 
 ### Community 471 - "Send Payment Result"
-Cohesion: 0.40
-Nodes (5): AuthorizationError, AlipayRequest, CardVerificationResult, SendPaymentResultRequest, NewSendPaymentResultRequest()
+Cohesion: 0.25
+Nodes (7): EventMetricCharge, SimplifyMerchantMetricEvent(), MerchantMetricEvent, Context, ControllerMetric, NewEventReq, NewEventRes
 
 ### Community 472 - "Alipay Refund Response"
 Cohesion: 0.33
@@ -2877,12 +2885,12 @@ Cohesion: 0.40
 Nodes (5): Meta, NewReq, NewRes, NewSubUpdatePageReq, NewSubUpdatePageRes
 
 ### Community 476 - "Merchant Role Permission"
-Cohesion: 0.53
-Nodes (5): MerchantRolePermission, removeByValue(), SimplifyMerchantRole(), MerchantRole, MerchantRolePermission
+Cohesion: 0.31
+Nodes (5): DefaultAlipayClient, buildBaseHeader(), checkRspSign(), AlipayRequest, CheckSignature()
 
 ### Community 477 - "Detect Local IP()"
-Cohesion: 0.33
-Nodes (3): ExtractFirstIPAddresses(), T, TestIpExtract()
+Cohesion: 0.44
+Nodes (7): getEnvelope(), Lookup(), ValidateNumber(), ValidateNumberExistence(), ValidateNumberExistenceV2(), ValidateNumberFormat(), ViesResponse
 
 ### Community 478 - "subscription pending update"
 Cohesion: 0.47
@@ -2997,8 +3005,8 @@ Cohesion: 0.40
 Nodes (3): LinkExportEntry(), Request, DownloadFile()
 
 ### Community 508 - "User Current Subscription"
-Cohesion: 0.40
-Nodes (4): Context, ControllerSubscription, UserCurrentSubscriptionDetailReq, UserCurrentSubscriptionDetailRes
+Cohesion: 0.32
+Nodes (7): B, BenchmarkValidateFormat(), ExampleValidateNumber(), TestValidateNumber(), TestValidateNumberExistence(), TestValidateNumberFormat(), T
 
 ### Community 509 - "Create Preview()"
 Cohesion: 0.40
@@ -3025,8 +3033,8 @@ Cohesion: 0.40
 Nodes (4): DeactivateReq, DeactivateRes, Context, ControllerDiscount
 
 ### Community 516 - "Delete Endpoint Req"
-Cohesion: 0.40
-Nodes (4): DeleteEndpointReq, DeleteEndpointRes, Context, ControllerWebhook
+Cohesion: 0.33
+Nodes (5): HealthCheck(), Version(), Request, Context, ReadBuildVersionInfo()
 
 ### Community 517 - "Activate Req"
 Cohesion: 0.40
@@ -3049,20 +3057,20 @@ Cohesion: 0.40
 Nodes (4): Context, EventListReq, EventListRes, ControllerMetric
 
 ### Community 522 - "Onetime Addon New"
-Cohesion: 0.40
-Nodes (4): Context, ControllerSubscription, OnetimeAddonNewReq, OnetimeAddonNewRes
+Cohesion: 0.05
+Nodes (33): GetMerchantId(), Context, DeleteReq, DeleteRes, ControllerDiscount, Context, ControllerDiscount, Context (+25 more)
 
 ### Community 523 - "Cancel At Period"
 Cohesion: 0.40
 Nodes (4): CancelAtPeriodEndReq, CancelAtPeriodEndRes, Context, ControllerSubscription
 
 ### Community 524 - "Controller Vat"
-Cohesion: 0.40
-Nodes (4): Context, ControllerVat, NumberValidateReq, NumberValidateRes
+Cohesion: 0.29
+Nodes (6): UniBee 与 QuickBooks 对接说明, 📌 为什么使用 Invoice + Payment 方式？, 🤝 合作建议, 🔐 授权时的知情义务, 🌐 特别说明（美国区）, 🧾 记录方式说明
 
 ### Community 525 - "Controller Webhook"
-Cohesion: 0.40
-Nodes (4): Context, ControllerWebhook, UpdateEndpointReq, UpdateEndpointRes
+Cohesion: 0.29
+Nodes (6): 🧾 How We Record Your Transactions, 🌐 Note for US QuickBooks Accounts, 🤝 Recommendations for a Smooth Integration, UniBee Integration with QuickBooks, 🔐 What Happens During Authorization, 📌 Why We Use the Invoice + Payment Model
 
 ### Community 526 - "Event List Req"
 Cohesion: 0.40
@@ -3070,7 +3078,7 @@ Nodes (4): Context, EventListReq, EventListRes, ControllerMetric
 
 ### Community 527 - "Create Req"
 Cohesion: 0.40
-Nodes (4): Context, CreateReq, CreateRes, ControllerSubscription
+Nodes (5): AddSpaceBeforeUpperCaseExceptFirst(), ConvertTimestampWithTimezone(), RefactorHeaderComments(), RefactorHeaders(), Comment
 
 ### Community 528 - "Credit Account List"
 Cohesion: 0.40
@@ -3081,12 +3089,12 @@ Cohesion: 0.40
 Nodes (4): Context, ControllerCredit, NewCreditRechargeReq, NewCreditRechargeRes
 
 ### Community 530 - "Delete Req"
-Cohesion: 0.40
-Nodes (4): Context, DeleteReq, DeleteRes, ControllerDiscount
+Cohesion: 0.33
+Nodes (5): Description, Environment, Expectations, How to reproduce, Result
 
 ### Community 531 - "User Discount List"
-Cohesion: 0.40
-Nodes (4): Context, ControllerDiscount, UserDiscountListReq, UserDiscountListRes
+Cohesion: 0.67
+Nodes (5): Context, Request, LinkEntry(), LinkPdfEntry(), VerifyInvoiceLinkSecurityToken()
 
 ### Community 532 - "Activate Req"
 Cohesion: 0.40
@@ -3113,12 +3121,12 @@ Cohesion: 0.40
 Nodes (4): Context, EditReq, EditRes, ControllerRole
 
 ### Community 538 - "Controller Role"
-Cohesion: 0.40
-Nodes (4): Context, ControllerRole, NewReq, NewRes
+Cohesion: 0.47
+Nodes (4): AlipayRequest, Amount, AlipayCaptureRequest, NewAlipayCaptureRequest()
 
 ### Community 539 - "Controller Session"
-Cohesion: 0.40
-Nodes (4): Context, ControllerSession, NewReq, NewRes
+Cohesion: 0.07
+Nodes (25): Context, ControllerSession, NewReq, NewRes, Context, ControllerSession, Context, ControllerAuth (+17 more)
 
 ### Community 540 - "Cancel Req"
 Cohesion: 0.40
@@ -3141,20 +3149,20 @@ Cohesion: 0.40
 Nodes (4): Context, ListReq, ListRes, ControllerSubscription
 
 ### Community 545 - "Change Email Req"
-Cohesion: 0.40
-Nodes (4): ChangeEmailReq, ChangeEmailRes, Context, ControllerUser
+Cohesion: 0.47
+Nodes (5): Context, MerchantMetricEventDetail, EventListInternalReq, EventListInternalRes, EventList()
 
 ### Community 546 - "Endpoint List Req"
 Cohesion: 0.40
-Nodes (4): EndpointListReq, EndpointListRes, Context, ControllerWebhook
+Nodes (4): AddNewTrialStartReq, AddNewTrialStartRes, Context, ControllerSubscription
 
 ### Community 547 - "Endpoint Log List"
-Cohesion: 0.40
-Nodes (4): EndpointLogListReq, EndpointLogListRes, Context, ControllerWebhook
+Cohesion: 0.60
+Nodes (4): TestForGetSubGatewayData(), TestForPayssion(), TestForPayssionGetPaymentDetail(), T
 
 ### Community 548 - "List Req"
-Cohesion: 0.40
-Nodes (4): Context, ListReq, ListRes, ControllerPlan
+Cohesion: 0.13
+Nodes (15): Context, ListReq, ListRes, ControllerPlan, Context, ListReq, ListRes, ControllerPlan (+7 more)
 
 ### Community 549 - "Onetime Addon New"
 Cohesion: 0.40
@@ -3162,7 +3170,7 @@ Nodes (4): Context, OnetimeAddonNewReq, OnetimeAddonNewRes, ControllerSubscripti
 
 ### Community 550 - "User Pending Crypto"
 Cohesion: 0.40
-Nodes (4): Context, ControllerSubscription, UserPendingCryptoSubscriptionDetailReq, UserPendingCryptoSubscriptionDetailRes
+Nodes (4): FileUploadReq, FileUploadRes, Context, ControllerOss
 
 ### Community 551 - "refund detail"
 Cohesion: 0.40
@@ -3181,12 +3189,12 @@ Cohesion: 0.40
 Nodes (4): Context, ControllerInvoice, MarkWireTransferSuccessReq, MarkWireTransferSuccessRes
 
 ### Community 557 - "Frozen Req"
-Cohesion: 0.40
-Nodes (4): Context, FrozenReq, FrozenRes, ControllerMember
+Cohesion: 0.18
+Nodes (8): Context, FrozenReq, FrozenRes, ControllerMember, Context, ControllerMember, ReleaseReq, ReleaseRes
 
 ### Community 558 - "Controller Member"
 Cohesion: 0.40
-Nodes (4): Context, ControllerMember, ReleaseReq, ReleaseRes
+Nodes (4): TestSendgridTemplate(), SyncToGatewayTemplate(), T, Context
 
 ### Community 559 - "Frozen Req"
 Cohesion: 0.40
@@ -3214,11 +3222,11 @@ Nodes (4): Context, CopyReq, CopyRes, ControllerPlan
 
 ### Community 565 - "Detail Req"
 Cohesion: 0.40
-Nodes (4): Context, DetailReq, DetailRes, ControllerPlan
+Nodes (4): Context, ControllerAuth, RegisterVerifyReq, RegisterVerifyRes
 
 ### Community 566 - "Archive Req"
 Cohesion: 0.40
-Nodes (4): ArchiveReq, ArchiveRes, Context, ControllerPlan
+Nodes (4): Context, ControllerCredit, PromoConfigReq, PromoConfigRes
 
 ### Community 567 - "Delete Req"
 Cohesion: 0.40
@@ -3226,15 +3234,15 @@ Nodes (4): Context, DeleteReq, DeleteRes, ControllerPlan
 
 ### Community 568 - "Edit Req"
 Cohesion: 0.40
-Nodes (4): Context, EditReq, EditRes, ControllerPlan
+Nodes (4): Context, ListReq, ListRes, ControllerDiscount
 
 ### Community 569 - "Controller Plan"
 Cohesion: 0.40
-Nodes (4): Context, ControllerPlan, NewReq, NewRes
+Nodes (4): Context, ControllerEmail, SenderSetupReq, SenderSetupRes
 
 ### Community 570 - "Controller Plan"
-Cohesion: 0.40
-Nodes (4): Context, ControllerPlan, UnPublishReq, UnPublishRes
+Cohesion: 0.33
+Nodes (5): Context, ControllerPlan, PlanUnPublish(), UnPublishReq, UnPublishRes
 
 ### Community 571 - "User Name"
 Cohesion: 0.40
@@ -3274,7 +3282,7 @@ Nodes (4): Context, DeleteReq, DeleteRes, ControllerInvoice
 
 ### Community 580 - "Controller Payment"
 Cohesion: 0.40
-Nodes (4): Context, ControllerPayment, RefundCancelReq, RefundCancelRes
+Nodes (4): Context, ControllerMember, UpdateMemberRoleReq, UpdateMemberRoleRes
 
 ### Community 581 - "Count Req"
 Cohesion: 0.40
@@ -3282,7 +3290,7 @@ Nodes (4): CountReq, CountRes, Context, ControllerUser
 
 ### Community 582 - "Admin Note List"
 Cohesion: 0.40
-Nodes (4): AdminNoteListReq, AdminNoteListRes, Context, ControllerUser
+Nodes (4): Context, ControllerPayment, MethodGetReq, MethodGetRes
 
 ### Community 583 - "Get Req"
 Cohesion: 0.40
@@ -3302,7 +3310,7 @@ Nodes (4): CancelAtPeriodEndReq, CancelAtPeriodEndRes, Context, ControllerSubscr
 
 ### Community 587 - "Cancel Last Cancel"
 Cohesion: 0.40
-Nodes (4): CancelLastCancelAtPeriodEndReq, CancelLastCancelAtPeriodEndRes, Context, ControllerSubscription
+Nodes (4): Context, ControllerPayment, RefundListReq, RefundListRes
 
 ### Community 588 - "Alipay Create Payout"
 Cohesion: 0.40
@@ -3338,7 +3346,7 @@ Nodes (4): Context, ControllerUser, ReleaseReq, ReleaseRes
 
 ### Community 596 - "Controller Webhook"
 Cohesion: 0.40
-Nodes (4): Context, ControllerWebhook, ResendWebhookReq, ResendWebhookRes
+Nodes (4): Context, DeleteReq, DeleteRes, ControllerProduct
 
 ### Community 597 - "Delete Plan Limit"
 Cohesion: 0.40
@@ -3353,8 +3361,8 @@ Cohesion: 0.40
 Nodes (4): Context, ControllerMetric, NewReq, NewRes
 
 ### Community 600 - "Merchant Metric"
-Cohesion: 0.60
-Nodes (4): Context, MerchantMetric, GetMerchantMetric(), GetMerchantMetricByCode()
+Cohesion: 0.24
+Nodes (11): Context, Json, MerchantMetricEvent, Context, MerchantMetric, MerchantMetricEventInternalReq, DelMerchantMetricEvent(), MerchantMetricEventCurrentValue() (+3 more)
 
 ### Community 601 - "Delete Req"
 Cohesion: 0.40
@@ -3370,7 +3378,7 @@ Nodes (4): EditPlanLimitReq, EditPlanLimitRes, Context, ControllerMetric
 
 ### Community 604 - "New Plan Limit"
 Cohesion: 0.40
-Nodes (4): Context, ControllerMetric, NewPlanLimitReq, NewPlanLimitRes
+Nodes (4): Context, ControllerSubscription, PendingUpdateDetailReq, PendingUpdateDetailRes
 
 ### Community 605 - "Declaration Record"
 Cohesion: 0.40
@@ -3410,11 +3418,11 @@ Nodes (4): Context, ControllerMetric, UserSubscriptionMetricReq, UserSubscriptio
 
 ### Community 614 - "Finish Req"
 Cohesion: 0.40
-Nodes (4): Context, FinishReq, FinishRes, ControllerInvoice
+Nodes (4): Context, ListReq, ListRes, ControllerUser
 
 ### Community 615 - "Controller Member"
 Cohesion: 0.40
-Nodes (4): Context, ControllerMember, ResetTotpReq, ResetTotpRes
+Nodes (4): Context, ControllerInformation, SendMockMQReq, SendMockMQRes
 
 ### Community 616 - "Controller Member"
 Cohesion: 0.40
@@ -3422,7 +3430,7 @@ Nodes (4): Context, ControllerMember, ProfileReq, ProfileRes
 
 ### Community 617 - "Controller Member"
 Cohesion: 0.40
-Nodes (4): Context, ControllerMember, UpdateReq, UpdateRes
+Nodes (4): Context, ControllerInvoice, QuickbooksSyncReq, QuickbooksSyncRes
 
 ### Community 618 - "Bulk Channel Sync"
 Cohesion: 0.40
@@ -3454,7 +3462,7 @@ Nodes (4): Context, NumberValidateReq, NumberValidateRes, ControllerVat
 
 ### Community 625 - "Gateway Refund()"
 Cohesion: 0.40
-Nodes (3): GatewayNewPaymentRefundReq, GatewayUserPaymentMethodCreateAndBindResp, ConvertToStringMetadata()
+Nodes (4): Context, DetailReq, DetailRes, ControllerInvoice
 
 ### Community 626 - "Generate ID()"
 Cohesion: 0.50
@@ -3497,8 +3505,8 @@ Cohesion: 0.67
 Nodes (3): Group, PermissionType, PermissionTypeGroup
 
 ### Community 636 - "Task For Update"
-Cohesion: 0.50
-Nodes (3): Context, TaskForUpdateAllMerchantStatistics(), UpdateMerchantStatsCron()
+Cohesion: 0.40
+Nodes (4): Context, ListReq, ListRes, ControllerInvoice
 
 ### Community 637 - "Alipay Customs Query"
 Cohesion: 0.50
@@ -3749,8 +3757,8 @@ Cohesion: 0.50
 Nodes (3): UserAdminNote, Meta, Time
 
 ### Community 699 - "Init Default Email"
-Cohesion: 0.83
-Nodes (3): InitDefaultEmailTemplate(), StandAloneInit(), Context
+Cohesion: 0.40
+Nodes (4): Context, MethodGetReq, MethodGetRes, ControllerPayment
 
 ### Community 700 - "Register Middleware()"
 Cohesion: 0.83
@@ -3817,8 +3825,8 @@ Cohesion: 0.50
 Nodes (3): Context, MerchantWebhookMessage, GetEarliestOneWebsocketUnreadMerchantWebhookMessage()
 
 ### Community 716 - "Invoice Detail()"
-Cohesion: 0.50
-Nodes (3): InvoiceDetail(), Context, InvoiceDetail
+Cohesion: 0.04
+Nodes (81): SimplifyInvoice(), ClearPaymentReq, ClearPaymentRes, ConvertInvoiceToDetail(), InvoiceDetail(), Action, Context, Message (+73 more)
 
 ### Community 717 - "Merchant Gateway"
 Cohesion: 0.50
@@ -3848,19 +3856,43 @@ Nodes (3): PayeePreferred, PaymentMethod, StandardEntryClassCode
 Cohesion: 0.67
 Nodes (3): PaymentSourceAttributesVault, PaymentSourceAttributesVerification, PaymentSourceAttributes
 
+### Community 897 - "IMerchant Auth"
+Cohesion: 0.40
+Nodes (4): ChangeGatewayReq, ChangeGatewayRes, Context, ControllerProfile
+
+### Community 899 - "IMerchant Credit"
+Cohesion: 0.40
+Nodes (4): CancelReq, CancelRes, Context, ControllerSubscription
+
+### Community 900 - "IMerchant Discount"
+Cohesion: 0.40
+Nodes (4): Context, ListReq, ListRes, ControllerSubscription
+
+### Community 903 - "IMerchant Oss"
+Cohesion: 0.50
+Nodes (4): Context, Invoice, LinkCheck(), LinkCheckRes
+
+### Community 904 - "IMerchant Payment"
+Cohesion: 0.67
+Nodes (3): SimplifyEmailDefaultTemplate(), EmailDefaultTemplate, Sender
+
+### Community 907 - "IMerchant Profile"
+Cohesion: 0.50
+Nodes (3): SetupGatewayInvokeReq, GatewayBank, GatewayCurrencyExchange
+
 ## Knowledge Gaps
-- **4299 isolated node(s):** `CreditTransaction`, `CreditRecharge`, `CreditRefund`, `Context`, `MerchantBatchTask` (+4294 more)
+- **4468 isolated node(s):** `CreditTransaction`, `CreditRecharge`, `CreditRefund`, `Context`, `MerchantBatchTask` (+4463 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **242 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **238 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Assert()` connect `Customize Localization Template` to `Check Credit Config`, `Controller Invoice`, `Task For Delete`, `Batch Send Sub`, `Controller Metric`, `Gateway User Payment`, `Credit Account`, `Gateway User Payment`, `Send Template Email`, `Page Data()`, `Cancel At Period`, `Gateway User Payment`, `Controller Gateway`, `Gateway User Payment`, `Controller Subscription`, `New Credit Recharge`, `Gateway User Payment`, `Gateway User Payment`, `Gateway User Payment`, `Gateway User Payment`, `Gateway User Payment`, `Edit Country Config`, `Gateway User Payment`, `Delete Req`, `Edit Req`, `Gateway User Payment`, `Gateway User Payment`, `Gateway User Payment`, `Gateway User Payment`, `Apply Subscription Next`, `Controller Role`, `Gateway User Payment`, `Controller Session`, `Cancel Req`, `Cancel Last Cancel`, `Detail Req`, `Gateway User Payment`, `Change Email Req`, `List Req`, `Controller Payment`, `Controller Subscription`, `User Pending Crypto`, `Webhook Event`, `Edit Promo Config`, `Controller Auth`, `Gateway User Payment`, `Create Or Update`, `Create Or Update`, `Archive Req`, `Copy Req`, `Delete Req`, `Detail Req`, `Controller Plan`, `Active Subscription Import`, `Controller Gateway`, `Onetime Addon New`, `Gateway User Attach`, `Controller Payment`, `Controller Checkout`, `Gateway Detail Invoice`, `Get Req`, `Cancel At Period`, `Cancel Last Cancel`, `Is Client Identity`, `Country List()`, `Logout Req`, `Health Check()`, `Controller Auth`, `Controller Vat`, `Merchant Discount Code`, `Controller Email`, `Amount Multi Currencies`, `Controller Auth`, `Convert Invoice To`, `Connection Quick Books`, `Get Merchant By`, `Merchant Webhook Endpoint`, `Is Lang Available()`, `Time Line List`, `Test Clock Walk`, `Detail Req`, `Test Sber Pay`, `Controller Metric`, `User Subscription Metric`, `Finish Req`, `Controller Member`, `Controller Member`, `Controller Member`, `Controller Product`, `User Subscription Metric`, `Metric Plan Charge`, `Logout Req`, `Disconnection Quick Books`, `Plan Multi Currency`, `Gateway Refund()`, `Merchant Gateway`, `Get Credit Account`, `Controller Email`, `Get Default Merchant`, `Get License Req`, `Handle Credit Recharge`, `Controller Task`, `Controller Profile`, `Controller Payment`, `Merchant User Discount`, `Plan Metric Limit`, `External Discount Param`, `Init Default Gateway`, `Sent Platform Merchant`, `Get Merchant Segment`, `Payment Item`, `Get Callback Impl()`, `Merchant Metric Plan`, `Subscription Pending Update`, `Credit Account Admin`, `credit Transaction Detail`, `Payment Status Enum`, `User Status To`, `Credit Note List`, `Get Payment By`, `Set Config()`, `User Sub Plan`, `Time Line List`, `Merchant Email History`, `Controller Auth`, `Get Member List`, `Export Column List`, `user Discount Detail`, `user Discount Detail`, `Edit Totp Config`, `Merchant Metric Event`, `Number Validate History`, `Merchant Batch Import`, `Detail Req`, `Gateway Redirect Resp`, `Gateway Redirect Resp`, `Gateway Redirect Resp`, `Gateway Redirect Resp`, `Gateway Redirect Resp`, `Add Space Before`, `transaction v2`, `Addons Binding Req`, `gateway webhook proxy`, `Gateway Setup Req`, `Merchant Batch Task`, `merchant create listener`, `Merchant Metric`, `Controller Search`, `Controller Payment`, `Merchant Batch Task`, `Merchant Operation Log`, `Gateway User Payment`, `Merchant Batch Export`, `convert CSVTo Xlsx()`, `List Req`, `subscription v2`, `Edit Credit Account`, `Controller Credit`, `merchant auth oauth`, `merchant auth oauth`, `Number Validate History`, `webhook listener`, `List Req`, `Test Message Listener`, `Activate Req`, `Get Refund Detail()`, `Webhook Event`, `user list`, `example Function()`, `refactor Header Group`, `Credit Account List`, `Credit Transaction List`, `Controller Plan`, `Check RKey Permission()`, `Create Preview()`?**
-  _High betweenness centrality (0.133) - this node is a cross-community bridge._
-- **Why does `MarshalToJsonString()` connect `Batch Send Sub` to `Check Credit Config`, `Controller Invoice`, `Customize Localization Template`, `Task For Delete`, `Controller Profile`, `Controller Metric`, `Credit Account`, `Gateway User Payment`, `Plan Metric Limit`, `Send Template Email`, `Page Data()`, `Sent Platform Merchant`, `Gateway User Payment`, `Init Default Gateway`, `Controller Subscription`, `Connection Quick Books`, `Get License Update`, `Gateway User Payment`, `Gateway User Payment`, `Gateway User Payment`, `Merchant Metric Plan`, `Apply Subscription Next`, `system invoice webhook`, `Get User Metric`, `Addons Binding Req`, `Get Payment By`, `Send Sendgrid Dynamic`, `system user webhook`, `merchant create listener`, `Merchant Metric`, `Webhook Event`, `Set Config()`, `Test For Alipay`, `Edit Promo Config`, `Create Or Update`, `Create Or Update`, `User Sub Plan`, `Country Rate`, `Get Member List`, `Active Subscription Import`, `Token Response`, `Subscription Onetime Addon`, `Gateway User Attach`, `Controller Checkout`, `Is Client Identity`, `Country List()`, `set Uni Bee`, `Controller Auth`, `Merchant Batch Export`, `convert CSVTo Xlsx()`, `Amount Multi Currencies`, `Endpoint Url`, `Is Lang Available()`, `Test Clock Walk`, `Convert Cent To`, `Quick Books Authorization`, `Controller Member`, `Disconnection Quick Books`, `Controller Email`, `Get Default Merchant`, `Get License Req`, `Controller Task`?**
-  _High betweenness centrality (0.036) - this node is a cross-community bridge._
-- **Why does `GetMerchantId()` connect `List Req` to `Check Credit Config`, `Controller Invoice`, `Credit Transaction List`, `Customize Localization Template`, `Deactivate Req`, `Activate Req`, `Edit Country Config`, `List Req`, `Mark Refund Invoice`, `Controller Metric`, `Send Template Email`, `Event List Req`, `Cancel At Period`, `Onetime Addon New`, `Controller Gateway`, `Controller Vat`, `Credit Account List`, `New Credit Recharge`, `Delete Req`, `User Discount List`, `Connection Quick Books`, `Activate Req`, `Inactive Req`, `Country Config List`, `Edit Country Config`, `Get License Update`, `Controller Payment`, `Delete Req`, `Edit Req`, `Controller Role`, `Controller Session`, `Apply Subscription Next`, `Cancel Req`, `Cancel Last Cancel`, `Config Req`, `Detail Req`, `List Req`, `Change Email Req`, `Delete Endpoint Req`, `Endpoint List Req`, `Endpoint Log List`, `List Req`, `Onetime Addon New`, `User Pending Crypto`, `Edit Promo Config`, `Controller Auth`, `Copy Req`, `Archive Req`, `Delete Req`, `Detail Req`, `Edit Req`, `Controller Plan`, `Controller Plan`, `Active Subscription Import`, `Controller Gateway`, `Count Req`, `Controller Checkout`, `Get Req`, `Controller Discount`, `Controller User`, `Get Credit Config`, `Country List()`, `Convert Invoice To`, `Health Check()`, `Controller Subscription`, `Controller Webhook`, `Merchant Discount Code`, `Controller Email`, `Delete Plan Limit`, `Edit Req`, `Controller Metric`, `Amount Multi Currencies`, `Delete Req`, `Get Bulk Preload`, `Detail Req`, `Edit Plan Limit`, `New Plan Limit`, `Controller Auth`, `Event List Req`, `Time Line List`, `Create Req`, `Detail Req`, `Controller Metric`, `User Subscription Metric`, `User Subscription Metric`, `Controller Product`, `Batch Send Sub`, `Disconnection Quick Books`, `Get Credit Account`, `Controller Email`, `Get Default Merchant`, `Get License Req`, `Controller Task`, `Controller Profile`, `Init Default Gateway`, `Get Merchant Segment`, `Payment Item`, `Controller Product`, `Subscription Pending Update`, `Credit Account Admin`, `Controller Plan`, `Time Line List`, `Merchant Email History`, `Controller Auth`, `Export Column List`, `Subscription Onetime Addon`, `Edit Totp Config`, `Merchant Batch Import`, `Detail Req`, `Gateway Setup Req`, `Merchant Batch Task`, `Controller Search`, `Controller Payment`, `Merchant Operation Log`, `List Req`, `List Req`, `Edit Credit Account`, `Controller Credit`, `List Req`, `Activate Req`, `Get Refund Detail()`, `List Req`, `Controller Plan`, `User Current Subscription`?**
+- **Why does `Assert()` connect `Customize Localization Template` to `Check Credit Config`, `Controller Invoice`, `Task For Delete`, `Batch Send Sub`, `Controller Metric`, `Credit Account`, `Gateway User Payment`, `Send Template Email`, `Page Data()`, `Onetime Addon New`, `Gateway User Payment`, `Controller Gateway`, `Gateway User Payment`, `Create Req`, `Connection Quick Books`, `Gateway User Payment`, `Gateway User Payment`, `Gateway User Payment`, `Gateway User Payment`, `Gateway User Payment`, `Controller Subscription`, `Gateway User Payment`, `New Credit Recharge`, `Edit Country Config`, `Gateway User Payment`, `Gateway User Payment`, `Gateway User Payment`, `Gateway User Payment`, `Apply Subscription Next`, `Delete Req`, `Gateway User Payment`, `Edit Req`, `Controller Session`, `Endpoint List Req`, `Cancel Req`, `Gateway User Payment`, `Detail Req`, `Change Email Req`, `Controller Payment`, `Controller Subscription`, `List Req`, `Webhook Event`, `Edit Promo Config`, `Controller Auth`, `Gateway User Payment`, `Create Or Update`, `Detail Req`, `Archive Req`, `Controller Plan`, `Copy Req`, `Delete Req`, `Controller Plan`, `Create Or Update`, `Active Subscription Import`, `Controller Gateway`, `Gateway User Attach`, `Controller Checkout`, `Cancel At Period`, `Get Req`, `Cancel At Period`, `Gateway Detail Invoice`, `Is Client Identity`, `Country List()`, `Logout Req`, `Health Check()`, `Controller Auth`, `Convert Invoice To`, `Controller Email`, `Amount Multi Currencies`, `Controller Auth`, `Merchant Metric`, `Get Merchant By`, `Merchant Webhook Endpoint`, `Is Lang Available()`, `Time Line List`, `Test Clock Walk`, `Convert Cent To`, `Detail Req`, `Test Sber Pay`, `User Subscription Metric`, `Controller Metric`, `Controller Member`, `Controller Member`, `Controller Product`, `User Subscription Metric`, `Logout Req`, `Disconnection Quick Books`, `Plan Multi Currency`, `Gateway Refund()`, `Merchant Gateway`, `Get Credit Account`, `Controller Email`, `Get Default Merchant`, `Get License Req`, `Task For Update`, `Handle Credit Recharge`, `Controller Task`, `Controller Invoice`, `Controller Profile`, `Controller Payment`, `Merchant User Discount`, `Plan Metric Limit`, `External Discount Param`, `Init Default Gateway`, `Sent Platform Merchant`, `Get Merchant Segment`, `Payment Item`, `Get Callback Impl()`, `Merchant Metric Plan`, `Cancel Last Cancel`, `Credit Account Admin`, `credit Transaction Detail`, `Payment Status Enum`, `Subscription Pending Update`, `User Status To`, `Set Config()`, `User Sub Plan`, `Time Line List`, `Merchant Email History`, `Get Member List`, `Export Column List`, `Invoice Detail()`, `user Discount Detail`, `user Discount Detail`, `Edit Totp Config`, `merchant member detail`, `Number Validate History`, `Merchant Batch Import`, `Detail Req`, `Gateway Redirect Resp`, `Gateway Redirect Resp`, `Add Space Before`, `transaction v2`, `gateway webhook proxy`, `Gateway Setup Req`, `Merchant Batch Task`, `merchant create listener`, `Merchant Metric`, `Controller Search`, `Merchant Batch Task`, `Merchant Operation Log`, `Gateway User Payment`, `Merchant Batch Export`, `convert CSVTo Xlsx()`, `List Req`, `subscription v2`, `Edit Credit Account`, `merchant auth oauth`, `merchant auth oauth`, `Number Validate History`, `webhook listener`, `List Req`, `Test Message Listener`, `Merchant Currency Config`, `IMerchant Auth`, `Get Plan By`, `Activate Req`, `IMerchant Credit`, `user list`, `example Function()`, `system invoice webhook`, `system user webhook`, `refactor Header Group`, `Credit Transaction List`, `Export Multi User`, `Export Plan Entity`, `webhook listener`, `Send Payment Result`, `Check RKey Permission()`, `Create Preview()`?**
+  _High betweenness centrality (0.119) - this node is a cross-community bridge._
+- **Why does `MarshalToJsonString()` connect `Webhook Event` to `Merchant Currency Config`, `Check Credit Config`, `Controller Invoice`, `Customize Localization Template`, `Batch Send Sub`, `Controller Profile`, `Task For Delete`, `merchant member detail`, `Plan Metric Limit`, `Credit Account`, `Send Template Email`, `Page Data()`, `Sent Platform Merchant`, `Init Default Gateway`, `Get Merchant Segment`, `Controller Subscription`, `Webhook Event`, `Connection Quick Books`, `Get License Update`, `Gateway User Payment`, `Gateway User Payment`, `Gateway User Payment`, `Merchant Metric Plan`, `Apply Subscription Next`, `Get User Metric`, `Get Payment By`, `Endpoint Log List`, `Send Sendgrid Dynamic`, `merchant create listener`, `Controller Member`, `Set Config()`, `Test For Alipay`, `Edit Promo Config`, `Create Or Update`, `User Sub Plan`, `Country Rate`, `Get Member List`, `Active Subscription Import`, `Export Plan Entity`, `Token Response`, `Controller Checkout`, `Invoice Detail()`, `Is Client Identity`, `Country List()`, `set Uni Bee`, `Controller Auth`, `webhook listener`, `Merchant Batch Export`, `Amount Multi Currencies`, `convert CSVTo Xlsx()`, `Merchant Metric`, `Endpoint Url`, `Is Lang Available()`, `Test Clock Walk`, `Test Sber Pay`, `Quick Books Authorization`, `Gateway Plan Status`, `Disconnection Quick Books`, `Controller Email`, `Get Default Merchant`, `Get License Req`, `Controller Task`?**
+  _High betweenness centrality (0.048) - this node is a cross-community bridge._
+- **Why does `GetMerchantId()` connect `Onetime Addon New` to `Check Credit Config`, `Controller Invoice`, `Credit Transaction List`, `Customize Localization Template`, `Deactivate Req`, `Activate Req`, `Edit Country Config`, `List Req`, `Mark Refund Invoice`, `Controller Metric`, `Send Template Email`, `Event List Req`, `Cancel At Period`, `Batch Send Sub`, `Controller Gateway`, `Event List Req`, `Credit Account List`, `New Credit Recharge`, `Connection Quick Books`, `Controller Subscription`, `Activate Req`, `Inactive Req`, `Country Config List`, `Edit Country Config`, `Get License Update`, `Delete Req`, `Controller Payment`, `Edit Req`, `Controller Session`, `Cancel Req`, `Cancel Last Cancel`, `Config Req`, `Detail Req`, `List Req`, `List Req`, `Onetime Addon New`, `Edit Promo Config`, `Copy Req`, `Archive Req`, `Delete Req`, `Edit Req`, `Controller Plan`, `List Req`, `Controller Plan`, `Active Subscription Import`, `Controller Gateway`, `Controller Payment`, `Count Req`, `Admin Note List`, `Controller Checkout`, `Get Req`, `Controller Discount`, `Cancel Last Cancel`, `Get Credit Config`, `Controller User`, `Country List()`, `Health Check()`, `Controller Webhook`, `Amount Multi Currencies`, `Controller Email`, `Delete Plan Limit`, `Edit Req`, `Controller Metric`, `Delete Req`, `Get Bulk Preload`, `Detail Req`, `Edit Plan Limit`, `Controller Auth`, `Merchant Webhook Endpoint`, `Time Line List`, `Detail Req`, `Controller Metric`, `User Subscription Metric`, `User Subscription Metric`, `Finish Req`, `Controller Product`, `Disconnection Quick Books`, `Plan Multi Currency`, `Gateway Refund()`, `Get Credit Account`, `Controller Email`, `Get License Req`, `Task For Update`, `Controller Task`, `Controller Profile`, `Init Default Gateway`, `Get Merchant Segment`, `Get Credit Account`, `Payment Item`, `Controller Product`, `Get Callback Impl()`, `Subscription Pending Update`, `Credit Account Admin`, `Controller Plan`, `Time Line List`, `Merchant Email History`, `Init Default Email`, `Export Column List`, `Subscription Onetime Addon`, `Invoice Detail()`, `Edit Totp Config`, `Merchant Batch Import`, `Detail Req`, `Gateway Setup Req`, `Merchant Batch Task`, `Merchant Metric`, `Controller Search`, `Merchant Operation Log`, `convert CSVTo Xlsx()`, `List Req`, `List Req`, `Edit Credit Account`, `Controller Credit`, `List Req`, `Get Plan By`, `Activate Req`, `Get Refund Detail()`, `IMerchant Discount`, `List Req`, `Export Multi User`, `Send Payment Result`?**
   _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **Are the 551 inferred relationships involving `Assert()` (e.g. with `QueryOrCreateCreditAccount()` and `CreditAccountAdminChange()`) actually correct?**
   _`Assert()` has 551 INFERRED edges - model-reasoned connections that need verification._

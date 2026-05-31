@@ -7,6 +7,7 @@ import (
 	"strings"
 	"testing"
 	"unibee/api/bean"
+	"unibee/internal/cmd/config"
 	"unibee/utility"
 
 	"github.com/gogf/gf/v2/frame/g"
@@ -72,6 +73,14 @@ func TestTemplateVariableReplacement(t *testing.T) {
 		}
 	}
 	g.Log().Infof(ctx, "subject:%v,\ncontent:%v", subject, content)
+}
+
+func TestShouldSkipMissingEmailGatewayInLocal(t *testing.T) {
+	config.SetConfig(`{"env":"local"}`)
+
+	if !shouldSkipMissingEmailGateway() {
+		t.Fatal("expected missing email gateway to be skipped in local env")
+	}
 }
 
 func TestUpdateEmailTemplateVariables(t *testing.T) {

@@ -176,6 +176,10 @@ func SetupMerchantEmailConfig(ctx context.Context, merchantId uint64, name strin
 	return err
 }
 
+func shouldSkipMissingEmailGateway() bool {
+	return config.GetConfigInstance().IsLocal()
+}
+
 func getEmailTemplateGroupVariables() []*bean.TemplateVariableGroup {
 	// Create a sample instance to get field information
 	sample := &bean.EmailTemplateVariable{}
@@ -236,6 +240,10 @@ func SendTemplateEmailByOpenApi(ctx context.Context, merchantId uint64, mailTo s
 	mailTo = strings.ToLower(mailTo)
 	_, emailGatewayKey := GetDefaultMerchantEmailConfigWithClusterCloud(ctx, merchantId)
 	if len(emailGatewayKey) == 0 {
+		if shouldSkipMissingEmailGateway() {
+			fmt.Printf("skip email send in local env, template:%s mailTo:%s\n", templateName, mailTo)
+			return nil
+		}
 		if strings.Compare(templateName, TemplateUserOTPLogin) == 0 || strings.Compare(templateName, TemplateUserRegistrationCodeVerify) == 0 {
 			utility.Assert(false, "Default Email Gateway Need Setup")
 		} else {
@@ -315,6 +323,10 @@ func SendTemplateEmail(superCtx context.Context, merchantId uint64, mailTo strin
 	mailTo = strings.ToLower(mailTo)
 	_, emailGatewayKey := GetDefaultMerchantEmailConfigWithClusterCloud(superCtx, merchantId)
 	if len(emailGatewayKey) == 0 {
+		if shouldSkipMissingEmailGateway() {
+			fmt.Printf("skip email send in local env, template:%s mailTo:%s\n", templateName, mailTo)
+			return nil
+		}
 		if strings.Compare(templateName, TemplateUserOTPLogin) == 0 || strings.Compare(templateName, TemplateUserRegistrationCodeVerify) == 0 {
 			utility.Assert(false, "Default Email Gateway Need Setup")
 		} else {

@@ -3360,9 +3360,9 @@
     "semantic_hash": "96aa141ca499cfc89e13e0a83970a2a7"
   },
   "/home/yangch/unibee-api/internal/cmd/config/init.go": {
-    "mtime": 1780168113.4327145,
-    "ast_hash": "80154c5ec0ce86c43b91c46d9cab0676",
-    "semantic_hash": "80154c5ec0ce86c43b91c46d9cab0676"
+    "mtime": 1780174286.3839836,
+    "ast_hash": "55ec1a577e2547160636bdd0dc575dde",
+    "semantic_hash": ""
   },
   "/home/yangch/unibee-api/internal/logic/coverage.sh": {
     "mtime": 1780168113.4487147,
@@ -7138,5 +7138,25 @@
     "mtime": 1780168113.4607148,
     "ast_hash": "788972598caf563a13952b1da4f009f3",
     "semantic_hash": "788972598caf563a13952b1da4f009f3"
+  },
+  "/home/yangch/unibee-api/internal/cmd/config/init_test.go": {
+    "mtime": 1780174240.9319046,
+    "ast_hash": "84c062ab79e7b7901fe2a248153e7415",
+    "semantic_hash": ""
+  },
+  "/home/yangch/unibee-api/.codex/hooks.json": {
+    "mtime": 1780171259.654222,
+    "ast_hash": "e518d7c879d7622a9b0fd1f05f3ebd76",
+    "semantic_hash": ""
+  },
+  "/home/yangch/unibee-api/AGENTS.md": {
+    "mtime": 1780171259.654222,
+    "ast_hash": "62c05a2bf20bf036a0b2633478663e64",
+    "semantic_hash": ""
+  },
+  "/home/yangch/unibee-api/docs/superpowers/specs/2026-05-30-python-api-rewrite-design.md": {
+    "mtime": 1780171897.1172843,
+    "ast_hash": "565cadfc9301753096a186bc1e9ca57b",
+    "semantic_hash": ""
   }
 }

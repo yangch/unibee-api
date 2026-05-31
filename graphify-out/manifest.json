@@ -3450,9 +3450,9 @@
     "semantic_hash": "d5bafd2a401793014b30ec485d3fb8b1"
   },
   "/home/yangch/unibee-api/internal/logic/email/email.go": {
-    "mtime": 1780168113.4487147,
-    "ast_hash": "fbd01d4d8d195d8a40efcec6a2e3b461",
-    "semantic_hash": "fbd01d4d8d195d8a40efcec6a2e3b461"
+    "mtime": 1780177594.48728,
+    "ast_hash": "dbfc9d48ac7bb12aec5ef31e59382a58",
+    "semantic_hash": ""
   },
   "/home/yangch/unibee-api/internal/logic/email/email_template.go": {
     "mtime": 1780168113.4487147,
@@ -3460,9 +3460,9 @@
     "semantic_hash": "7d4ea46f52dfd672576cdf973b0dbf61"
   },
   "/home/yangch/unibee-api/internal/logic/email/email_test.go": {
-    "mtime": 1780168113.4527147,
-    "ast_hash": "39ee91a5f516ea3da1d01b7060062ffd",
-    "semantic_hash": "39ee91a5f516ea3da1d01b7060062ffd"
+    "mtime": 1780177552.5472574,
+    "ast_hash": "1432916620887dd97e24005573614eb9",
+    "semantic_hash": ""
   },
   "/home/yangch/unibee-api/internal/logic/email/setup.go": {
     "mtime": 1780168113.4527147,
